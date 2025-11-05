@@ -1,0 +1,106 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    /* ================= Windows (MSVC + NMake) ================= */
+    {
+      "label": "Build EstimatorPortN (Windows, DLL -> Estimator/)",
+      "type": "shell",
+      "command": "call \"%ProgramFiles(x86)%\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" && echo [1] ENV OK & where cl & where cmake && if not exist Temp\\build-win mkdir Temp\\build-win && cmake -S . -B Temp/build-win -G \"NMake Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES && echo [2] CONFIGURE OK && cmake --build Temp/build-win --target EstimatorPortN -j && echo [3] BUILD OK && dir /b Estimator\\EstimatorPortN.dll & dir /b Estimator\\EstimatorPortN.lib",
+      "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "C:\\Windows\\System32\\cmd.exe", "args": ["/d","/c"] } },
+      "problemMatcher": "$msCompile",
+      "group": { "kind": "build", "isDefault": false }
+    },
+    {
+      "label": "Build C_Demo (Windows, exe -> root)",
+      "type": "shell",
+      "command": "call \"%ProgramFiles(x86)%\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" && echo [1] ENV OK & where cl & where cmake && if not exist Temp\\build-win mkdir Temp\\build-win && cmake -S . -B Temp/build-win -G \"NMake Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES && echo [2] CONFIGURE OK && cmake --build Temp/build-win --target C_Demo -j && echo [3] BUILD OK && dir /b C_Demo.exe",
+      "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "C:\\Windows\\System32\\cmd.exe", "args": ["/d","/c"] } },
+      "problemMatcher": "$msCompile",
+      "group": { "kind": "build", "isDefault": false }
+    },
+    {
+      "label": "Build Cpp_Demo (Windows, exe -> root)",
+      "type": "shell",
+      "command": "call \"%ProgramFiles(x86)%\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" && echo [1] ENV OK & where cl & where cmake && if not exist Temp\\build-win mkdir Temp\\build-win && cmake -S . -B Temp/build-win -G \"NMake Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES && echo [2] CONFIGURE OK && cmake --build Temp/build-win --target Cpp_Demo -j && echo [3] BUILD OK && dir /b Cpp_Demo.exe",
+      "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "C:\\Windows\\System32\\cmd.exe", "args": ["/d","/c"] } },
+      "problemMatcher": "$msCompile",
+      "group": { "kind": "build", "isDefault": false }
+    },
+
+    {
+      "label": "Build C_DLL_Demo (Windows, exe -> root)",
+      "type": "shell",
+      "command": "call \"%ProgramFiles(x86)%\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" && echo [1] ENV OK & where cl & where cmake && if not exist Temp\\build-win mkdir Temp\\build-win && cmake -S . -B Temp/build-win -G \"NMake Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES && echo [2] CONFIGURE OK && cmake --build Temp/build-win --target C_DLL_Demo -j && echo [3] BUILD OK && dir /b C_DLL_Demo.exe & dir /b Estimator\\EstimatorPortN.dll",
+      "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "C:\\Windows\\System32\\cmd.exe", "args": ["/d","/c"] } },
+      "problemMatcher": "$msCompile",
+      "group": { "kind": "build", "isDefault": false }
+    },
+    {
+      "label": "Build Cpp_DLL_Demo (Windows, exe -> root)",
+      "type": "shell",
+      "command": "call \"%ProgramFiles(x86)%\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\" && echo [1] ENV OK & where cl & where cmake && if not exist Temp\\build-win mkdir Temp\\build-win && cmake -S . -B Temp/build-win -G \"NMake Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES && echo [2] CONFIGURE OK && cmake --build Temp/build-win --target Cpp_DLL_Demo -j && echo [3] BUILD OK && dir /b Cpp_DLL_Demo.exe & dir /b Estimator\\EstimatorPortN.dll",
+      "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "C:\\Windows\\System32\\cmd.exe", "args": ["/d","/c"] } },
+      "problemMatcher": "$msCompile",
+      "group": { "kind": "build", "isDefault": false }
+    },
+
+    /* ================= Linux (gcc/clang + Make) ================= */
+    {
+      "label": "Build C_Demo (Linux, exe -> root)",
+      "type": "shell",
+      "command": "mkdir -p Temp/build-linux && cmake -S . -B Temp/build-linux -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES && echo [2] CONFIGURE OK && cmake --build Temp/build-linux --target C_Demo -j && echo [3] BUILD OK && ls -1 C_Demo",
+      "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "/bin/bash", "args": ["-lc"] } },
+      "problemMatcher": "$gcc",
+      "group": { "kind": "build", "isDefault": false }
+    },
+    {
+      "label": "Build Cpp_Demo (Linux, exe -> root)",
+      "type": "shell",
+      "command": "mkdir -p Temp/build-linux && cmake -S . -B Temp/build-linux -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES && echo [2] CONFIGURE OK && cmake --build Temp/build-linux --target Cpp_Demo -j && echo [3] BUILD OK && ls -1 Cpp_Demo",
+      "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "/bin/bash", "args": ["-lc"] } },
+      "problemMatcher": "$gcc",
+      "group": { "kind": "build", "isDefault": false }
+    },
+    {
+      "label": "Build EstimatorPortN (Linux, SO -> Estimator/)",
+      "type": "shell",
+      "command": "mkdir -p Temp/build-linux && cmake -S . -B Temp/build-linux -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES && echo [2] CONFIGURE OK && cmake --build Temp/build-linux --target EstimatorPortN -j && echo [3] BUILD OK && ls -1 Estimator/EstimatorPortN.so",
+      "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "/bin/bash", "args": ["-lc"] } },
+      "problemMatcher": "$gcc",
+      "group": { "kind": "build", "isDefault": false }
+    },
+
+    {
+      "label": "Build C_SO_Demo (Linux, exe -> root)",
+      "type": "shell",
+      "command": "mkdir -p Temp/build-linux && cmake -S . -B Temp/build-linux -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES && echo [2] CONFIGURE OK && cmake --build Temp/build-linux --target C_SO_Demo -j && echo [3] BUILD OK && ls -1 Output/C_SO_Demo Estimator/EstimatorPortN.so",
+      "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "/bin/bash", "args": ["-lc"] } },
+      "problemMatcher": "$gcc",
+      "group": { "kind": "build", "isDefault": false }
+    },
+    {
+      "label": "Build Cpp_SO_Demo (Linux, exe -> root)",
+      "type": "shell",
+      "command": "mkdir -p Temp/build-linux && cmake -S . -B Temp/build-linux -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=YES && echo [2] CONFIGURE OK && cmake --build Temp/build-linux --target Cpp_SO_Demo -j && echo [3] BUILD OK && ls -1 Output/Cpp_SO_Demo Estimator/EstimatorPortN.so",
+      "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "/bin/bash", "args": ["-lc"] } },
+      "problemMatcher": "$gcc",
+      "group": { "kind": "build", "isDefault": false }
+    },
+
+    /* ================= Clean ================= */
+    {
+      "label": "Clean (Linux)",
+      "type": "shell",
+      "command": "rm -rf Temp/build-linux Temp/bin",
+      "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "/bin/bash", "args": ["-lc"] } },
+      "group": { "kind": "build", "isDefault": false }
+    },
+    {
+      "label": "Clean (Windows)",
+      "type": "shell",
+      "command": "if exist Temp\\build-win ( rmdir /s /q Temp\\build-win ) & if exist Temp\\bin rmdir /s /q Temp\\bin ",
+      "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "C:\\Windows\\System32\\cmd.exe", "args": ["/d","/c"] } },
+      "group": { "kind": "build", "isDefault": false }
+    }
+  ]
+}

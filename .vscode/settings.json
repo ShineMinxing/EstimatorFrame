@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "matrix.h": "c",
+        "iosfwd": "cpp",
+        "cstring": "cpp"
+    }
+}
