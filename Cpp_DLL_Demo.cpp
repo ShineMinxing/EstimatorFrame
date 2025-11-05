@@ -43,7 +43,7 @@ extern "C" {
 // Macro definitions
 #define INPUT_PATH "ObservationData/DoubleReflectorTrace/Trace1000.txt"
 #define OUTPUT_PATH "EstimationResult"
-#define DLL_PATH "Estimator/EstimatorPortN.dll"
+#define DLL_PATH "Output/EstimatorPortN.dll"
 #define DATA_ROWS 1000
 #define READ_DATA_COLUMNS 3
 #define WRITE_DATA_COLUMNS 5

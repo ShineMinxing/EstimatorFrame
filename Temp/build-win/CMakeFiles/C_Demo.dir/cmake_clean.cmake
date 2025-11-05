@@ -13,8 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/C_Demo.dir/Estimator/Cpp_Estimators/Estimator2002_UnscentedKalmanEstiamtor.cpp.obj.d"
   "CMakeFiles/C_Demo.dir/Estimator/StateSpaceModel1.c.obj"
   "CMakeFiles/C_Demo.dir/Estimator/StateSpaceModel1.c.obj.d"
-  "D:/Temp/Project/EstimatorFrame/C_Demo.exe"
-  "D:/Temp/Project/EstimatorFrame/C_Demo.exe.manifest"
+  "D:/Temp/Project/EstimatorFrame/Output/C_Demo.exe"
+  "D:/Temp/Project/EstimatorFrame/Output/C_Demo.exe.manifest"
   "D:/Temp/Project/EstimatorFrame/Temp/bin/C_Demo.lib"
   "D:/Temp/Project/EstimatorFrame/Temp/bin/C_Demo.pdb"
 )

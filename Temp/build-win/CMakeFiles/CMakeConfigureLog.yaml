@@ -55,6 +55,9 @@ events:
       - "C:/Program Files/MATLAB/R2025a/bin/"
       - "C:/Program Files/MiKTeX/miktex/bin/x64/"
       - "C:/Program Files/gs/gs10.05.1/bin/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/40143/scoop/shims/"
       - "C:/Users/40143/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Program Files/Microsoft VS Code/bin/"
@@ -95,6 +98,9 @@ events:
         - "C:\\Program Files\\MATLAB\\R2025a\\bin"
         - "C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\"
         - "C:\\Program Files\\gs\\gs10.05.1\\bin"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\40143\\scoop\\shims"
         - "C:\\Users\\40143\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Program Files\\Microsoft VS Code\\bin"
@@ -157,6 +163,9 @@ events:
         - "C:\\Program Files\\MATLAB\\R2025a\\bin"
         - "C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\"
         - "C:\\Program Files\\gs\\gs10.05.1\\bin"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\40143\\scoop\\shims"
         - "C:\\Users\\40143\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Program Files\\Microsoft VS Code\\bin"
@@ -268,6 +277,9 @@ events:
       - "C:/Program Files/MATLAB/R2025a/bin/"
       - "C:/Program Files/MiKTeX/miktex/bin/x64/"
       - "C:/Program Files/gs/gs10.05.1/bin/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/40143/scoop/shims/"
       - "C:/Users/40143/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Program Files/Microsoft VS Code/bin/"
@@ -308,6 +320,9 @@ events:
         - "C:\\Program Files\\MATLAB\\R2025a\\bin"
         - "C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\"
         - "C:\\Program Files\\gs\\gs10.05.1\\bin"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\40143\\scoop\\shims"
         - "C:\\Users\\40143\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Program Files\\Microsoft VS Code\\bin"
@@ -365,6 +380,9 @@ events:
       - "C:/Program Files/MATLAB/R2025a/bin/"
       - "C:/Program Files/MiKTeX/miktex/bin/x64/"
       - "C:/Program Files/gs/gs10.05.1/bin/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/40143/scoop/shims/"
       - "C:/Users/40143/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Program Files/Microsoft VS Code/bin/"
@@ -455,6 +473,15 @@ events:
       - "C:/Program Files/gs/gs10.05.1/bin/lld-link.com"
       - "C:/Program Files/gs/gs10.05.1/bin/lld-link.exe"
       - "C:/Program Files/gs/gs10.05.1/bin/lld-link"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/lld-link.com"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/lld-link.exe"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/lld-link"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/lld-link.com"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/lld-link.exe"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/lld-link"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/lld-link.com"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/lld-link.exe"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/lld-link"
       - "C:/Users/40143/scoop/shims/lld-link.com"
       - "C:/Users/40143/scoop/shims/lld-link.exe"
       - "C:/Users/40143/scoop/shims/lld-link"
@@ -509,6 +536,9 @@ events:
         - "C:\\Program Files\\MATLAB\\R2025a\\bin"
         - "C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\"
         - "C:\\Program Files\\gs\\gs10.05.1\\bin"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\40143\\scoop\\shims"
         - "C:\\Users\\40143\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Program Files\\Microsoft VS Code\\bin"
@@ -564,6 +594,9 @@ events:
       - "C:/Program Files/MATLAB/R2025a/bin/"
       - "C:/Program Files/MiKTeX/miktex/bin/x64/"
       - "C:/Program Files/gs/gs10.05.1/bin/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/40143/scoop/shims/"
       - "C:/Users/40143/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Program Files/Microsoft VS Code/bin/"
@@ -604,6 +637,9 @@ events:
         - "C:\\Program Files\\MATLAB\\R2025a\\bin"
         - "C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\"
         - "C:\\Program Files\\gs\\gs10.05.1\\bin"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\40143\\scoop\\shims"
         - "C:\\Users\\40143\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Program Files\\Microsoft VS Code\\bin"
@@ -659,6 +695,9 @@ events:
       - "C:/Program Files/MATLAB/R2025a/bin/"
       - "C:/Program Files/MiKTeX/miktex/bin/x64/"
       - "C:/Program Files/gs/gs10.05.1/bin/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/40143/scoop/shims/"
       - "C:/Users/40143/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Program Files/Microsoft VS Code/bin/"
@@ -717,6 +756,9 @@ events:
         - "C:\\Program Files\\MATLAB\\R2025a\\bin"
         - "C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\"
         - "C:\\Program Files\\gs\\gs10.05.1\\bin"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\40143\\scoop\\shims"
         - "C:\\Users\\40143\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Program Files\\Microsoft VS Code\\bin"
@@ -772,6 +814,9 @@ events:
       - "C:/Program Files/MATLAB/R2025a/bin/"
       - "C:/Program Files/MiKTeX/miktex/bin/x64/"
       - "C:/Program Files/gs/gs10.05.1/bin/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/40143/scoop/shims/"
       - "C:/Users/40143/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Program Files/Microsoft VS Code/bin/"
@@ -812,6 +857,9 @@ events:
         - "C:\\Program Files\\MATLAB\\R2025a\\bin"
         - "C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\"
         - "C:\\Program Files\\gs\\gs10.05.1\\bin"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\40143\\scoop\\shims"
         - "C:\\Users\\40143\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Program Files\\Microsoft VS Code\\bin"
@@ -873,6 +921,9 @@ events:
         - "C:\\Program Files\\MATLAB\\R2025a\\bin"
         - "C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\"
         - "C:\\Program Files\\gs\\gs10.05.1\\bin"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\40143\\scoop\\shims"
         - "C:\\Users\\40143\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Program Files\\Microsoft VS Code\\bin"
@@ -935,6 +986,9 @@ events:
         - "C:\\Program Files\\MATLAB\\R2025a\\bin"
         - "C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\"
         - "C:\\Program Files\\gs\\gs10.05.1\\bin"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\40143\\scoop\\shims"
         - "C:\\Users\\40143\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Program Files\\Microsoft VS Code\\bin"
@@ -1046,6 +1100,9 @@ events:
       - "C:/Program Files/MATLAB/R2025a/bin/"
       - "C:/Program Files/MiKTeX/miktex/bin/x64/"
       - "C:/Program Files/gs/gs10.05.1/bin/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/40143/scoop/shims/"
       - "C:/Users/40143/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Program Files/Microsoft VS Code/bin/"
@@ -1136,6 +1193,15 @@ events:
       - "C:/Program Files/gs/gs10.05.1/bin/lld-link.com"
       - "C:/Program Files/gs/gs10.05.1/bin/lld-link.exe"
       - "C:/Program Files/gs/gs10.05.1/bin/lld-link"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/lld-link.com"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/lld-link.exe"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/lld-link"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/lld-link.com"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/lld-link.exe"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/lld-link"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/lld-link.com"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/lld-link.exe"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/lld-link"
       - "C:/Users/40143/scoop/shims/lld-link.com"
       - "C:/Users/40143/scoop/shims/lld-link.exe"
       - "C:/Users/40143/scoop/shims/lld-link"
@@ -1190,6 +1256,9 @@ events:
         - "C:\\Program Files\\MATLAB\\R2025a\\bin"
         - "C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\"
         - "C:\\Program Files\\gs\\gs10.05.1\\bin"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\40143\\scoop\\shims"
         - "C:\\Users\\40143\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Program Files\\Microsoft VS Code\\bin"
@@ -1248,6 +1317,9 @@ events:
       - "C:/Program Files/MATLAB/R2025a/bin/"
       - "C:/Program Files/MiKTeX/miktex/bin/x64/"
       - "C:/Program Files/gs/gs10.05.1/bin/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/Scripts/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Python312/"
+      - "C:/Users/40143/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/40143/scoop/shims/"
       - "C:/Users/40143/AppData/Local/Microsoft/WindowsApps/"
       - "C:/Program Files/Microsoft VS Code/bin/"
@@ -1318,6 +1390,9 @@ events:
         - "C:\\Program Files\\MATLAB\\R2025a\\bin"
         - "C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\"
         - "C:\\Program Files\\gs\\gs10.05.1\\bin"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Python312\\"
+        - "C:\\Users\\40143\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\40143\\scoop\\shims"
         - "C:\\Users\\40143\\AppData\\Local\\Microsoft\\WindowsApps"
         - "C:\\Program Files\\Microsoft VS Code\\bin"
@@ -1341,8 +1416,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "D:/Temp/Project/EstimatorFrame/Temp/build-win/CMakeFiles/CMakeScratch/TryCompile-ep2uq3"
-      binary: "D:/Temp/Project/EstimatorFrame/Temp/build-win/CMakeFiles/CMakeScratch/TryCompile-ep2uq3"
+      source: "D:/Temp/Project/EstimatorFrame/Temp/build-win/CMakeFiles/CMakeScratch/TryCompile-ky3k2m"
+      binary: "D:/Temp/Project/EstimatorFrame/Temp/build-win/CMakeFiles/CMakeScratch/TryCompile-ky3k2m"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1351,28 +1426,28 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/Temp/Project/EstimatorFrame/Temp/build-win/CMakeFiles/CMakeScratch/TryCompile-ep2uq3'
+        Change Dir: 'D:/Temp/Project/EstimatorFrame/Temp/build-win/CMakeFiles/CMakeScratch/TryCompile-ky3k2m'
         
-        Run Build Command(s): C:/Users/40143/scoop/apps/cmake/current/bin/cmake.exe -E env VERBOSE=1 nmake -f Makefile /nologo cmTC_b95cc\\fast
-        	"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\nmake.exe"  -f CMakeFiles\\cmTC_b95cc.dir\\build.make /nologo -L                  CMakeFiles\\cmTC_b95cc.dir\\build
-        Building C object CMakeFiles/cmTC_b95cc.dir/CMakeCCompilerABI.c.obj
-        	C:\\Users\\40143\\scoop\\apps\\cmake\\current\\bin\\cmake.exe -E cmake_cl_compile_depends --dep-file=CMakeFiles\\cmTC_b95cc.dir\\CMakeCCompilerABI.c.obj.d --working-dir=D:\\Temp\\Project\\EstimatorFrame\\Temp\\build-win\\CMakeFiles\\CMakeScratch\\TryCompile-ep2uq3 --filter-prefix="注意: 包含文件:  " -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\cl.exe @C:\\Users\\40143\\AppData\\Local\\Temp\\nm5D02.tmp
+        Run Build Command(s): C:/Users/40143/scoop/apps/cmake/current/bin/cmake.exe -E env VERBOSE=1 nmake -f Makefile /nologo cmTC_261b2\\fast
+        	"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\nmake.exe"  -f CMakeFiles\\cmTC_261b2.dir\\build.make /nologo -L                  CMakeFiles\\cmTC_261b2.dir\\build
+        Building C object CMakeFiles/cmTC_261b2.dir/CMakeCCompilerABI.c.obj
+        	C:\\Users\\40143\\scoop\\apps\\cmake\\current\\bin\\cmake.exe -E cmake_cl_compile_depends --dep-file=CMakeFiles\\cmTC_261b2.dir\\CMakeCCompilerABI.c.obj.d --working-dir=D:\\Temp\\Project\\EstimatorFrame\\Temp\\build-win\\CMakeFiles\\CMakeScratch\\TryCompile-ky3k2m --filter-prefix="注意: 包含文件:  " -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\cl.exe @C:\\Users\\40143\\AppData\\Local\\Temp\\nm4C66.tmp
         CMakeCCompilerABI.c
-        Linking C executable cmTC_b95cc.exe
-        	C:\\Users\\40143\\scoop\\apps\\cmake\\current\\bin\\cmake.exe -E vs_link_exe --msvc-ver=1944 --intdir=CMakeFiles\\cmTC_b95cc.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_b95cc.dir\\objects1.rsp @C:\\Users\\40143\\AppData\\Local\\Temp\\nm5E5A.tmp
+        Linking C executable cmTC_261b2.exe
+        	C:\\Users\\40143\\scoop\\apps\\cmake\\current\\bin\\cmake.exe -E vs_link_exe --msvc-ver=1944 --intdir=CMakeFiles\\cmTC_261b2.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_261b2.dir\\objects1.rsp @C:\\Users\\40143\\AppData\\Local\\Temp\\nm4CA6.tmp
         Visual Studio Incremental Link with embedded manifests
-        Create CMakeFiles\\cmTC_b95cc.dir/manifest.rc
-        Create empty: CMakeFiles\\cmTC_b95cc.dir/embed.manifest
+        Create CMakeFiles\\cmTC_261b2.dir/manifest.rc
+        Create empty: CMakeFiles\\cmTC_261b2.dir/embed.manifest
         RC Pass 1:
-        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_b95cc.dir/manifest.res CMakeFiles\\cmTC_b95cc.dir/manifest.rc
+        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_261b2.dir/manifest.res CMakeFiles\\cmTC_261b2.dir/manifest.rc
         LINK Pass 1:
-        C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_b95cc.dir\\objects1.rsp /out:cmTC_b95cc.exe /implib:cmTC_b95cc.lib /pdb:D:\\Temp\\Project\\EstimatorFrame\\Temp\\build-win\\CMakeFiles\\CMakeScratch\\TryCompile-ep2uq3\\cmTC_b95cc.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_b95cc.dir/intermediate.manifest CMakeFiles\\cmTC_b95cc.dir/manifest.res
+        C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_261b2.dir\\objects1.rsp /out:cmTC_261b2.exe /implib:cmTC_261b2.lib /pdb:D:\\Temp\\Project\\EstimatorFrame\\Temp\\build-win\\CMakeFiles\\CMakeScratch\\TryCompile-ky3k2m\\cmTC_261b2.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_261b2.dir/intermediate.manifest CMakeFiles\\cmTC_261b2.dir/manifest.res
         MT:
-        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe /nologo /manifest CMakeFiles\\cmTC_b95cc.dir/intermediate.manifest /out:CMakeFiles\\cmTC_b95cc.dir/embed.manifest /notify_update
+        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe /nologo /manifest CMakeFiles\\cmTC_261b2.dir/intermediate.manifest /out:CMakeFiles\\cmTC_261b2.dir/embed.manifest /notify_update
         RC Pass 2:
-        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_b95cc.dir/manifest.res CMakeFiles\\cmTC_b95cc.dir/manifest.rc
+        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_261b2.dir/manifest.res CMakeFiles\\cmTC_261b2.dir/manifest.rc
         FINAL LINK:
-        C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_b95cc.dir\\objects1.rsp /out:cmTC_b95cc.exe /implib:cmTC_b95cc.lib /pdb:D:\\Temp\\Project\\EstimatorFrame\\Temp\\build-win\\CMakeFiles\\CMakeScratch\\TryCompile-ep2uq3\\cmTC_b95cc.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_b95cc.dir/intermediate.manifest CMakeFiles\\cmTC_b95cc.dir/manifest.res
+        C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_261b2.dir\\objects1.rsp /out:cmTC_261b2.exe /implib:cmTC_261b2.lib /pdb:D:\\Temp\\Project\\EstimatorFrame\\Temp\\build-win\\CMakeFiles\\CMakeScratch\\TryCompile-ky3k2m\\cmTC_261b2.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_261b2.dir/intermediate.manifest CMakeFiles\\cmTC_261b2.dir/manifest.res
         
       exitCode: 0
   -
@@ -1412,8 +1487,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "D:/Temp/Project/EstimatorFrame/Temp/build-win/CMakeFiles/CMakeScratch/TryCompile-q5chw8"
-      binary: "D:/Temp/Project/EstimatorFrame/Temp/build-win/CMakeFiles/CMakeScratch/TryCompile-q5chw8"
+      source: "D:/Temp/Project/EstimatorFrame/Temp/build-win/CMakeFiles/CMakeScratch/TryCompile-mmqsjs"
+      binary: "D:/Temp/Project/EstimatorFrame/Temp/build-win/CMakeFiles/CMakeScratch/TryCompile-mmqsjs"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1423,28 +1498,28 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/Temp/Project/EstimatorFrame/Temp/build-win/CMakeFiles/CMakeScratch/TryCompile-q5chw8'
+        Change Dir: 'D:/Temp/Project/EstimatorFrame/Temp/build-win/CMakeFiles/CMakeScratch/TryCompile-mmqsjs'
         
-        Run Build Command(s): C:/Users/40143/scoop/apps/cmake/current/bin/cmake.exe -E env VERBOSE=1 nmake -f Makefile /nologo cmTC_8535c\\fast
-        	"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\nmake.exe"  -f CMakeFiles\\cmTC_8535c.dir\\build.make /nologo -L                  CMakeFiles\\cmTC_8535c.dir\\build
-        Building CXX object CMakeFiles/cmTC_8535c.dir/CMakeCXXCompilerABI.cpp.obj
-        	C:\\Users\\40143\\scoop\\apps\\cmake\\current\\bin\\cmake.exe -E cmake_cl_compile_depends --dep-file=CMakeFiles\\cmTC_8535c.dir\\CMakeCXXCompilerABI.cpp.obj.d --working-dir=D:\\Temp\\Project\\EstimatorFrame\\Temp\\build-win\\CMakeFiles\\CMakeScratch\\TryCompile-q5chw8 --filter-prefix="注意: 包含文件:  " -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\cl.exe @C:\\Users\\40143\\AppData\\Local\\Temp\\nm606D.tmp
+        Run Build Command(s): C:/Users/40143/scoop/apps/cmake/current/bin/cmake.exe -E env VERBOSE=1 nmake -f Makefile /nologo cmTC_66657\\fast
+        	"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\nmake.exe"  -f CMakeFiles\\cmTC_66657.dir\\build.make /nologo -L                  CMakeFiles\\cmTC_66657.dir\\build
+        Building CXX object CMakeFiles/cmTC_66657.dir/CMakeCXXCompilerABI.cpp.obj
+        	C:\\Users\\40143\\scoop\\apps\\cmake\\current\\bin\\cmake.exe -E cmake_cl_compile_depends --dep-file=CMakeFiles\\cmTC_66657.dir\\CMakeCXXCompilerABI.cpp.obj.d --working-dir=D:\\Temp\\Project\\EstimatorFrame\\Temp\\build-win\\CMakeFiles\\CMakeScratch\\TryCompile-mmqsjs --filter-prefix="注意: 包含文件:  " -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\cl.exe @C:\\Users\\40143\\AppData\\Local\\Temp\\nm4DAE.tmp
         CMakeCXXCompilerABI.cpp
-        Linking CXX executable cmTC_8535c.exe
-        	C:\\Users\\40143\\scoop\\apps\\cmake\\current\\bin\\cmake.exe -E vs_link_exe --msvc-ver=1944 --intdir=CMakeFiles\\cmTC_8535c.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_8535c.dir\\objects1.rsp @C:\\Users\\40143\\AppData\\Local\\Temp\\nm60BC.tmp
+        Linking CXX executable cmTC_66657.exe
+        	C:\\Users\\40143\\scoop\\apps\\cmake\\current\\bin\\cmake.exe -E vs_link_exe --msvc-ver=1944 --intdir=CMakeFiles\\cmTC_66657.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_66657.dir\\objects1.rsp @C:\\Users\\40143\\AppData\\Local\\Temp\\nm4DEE.tmp
         Visual Studio Incremental Link with embedded manifests
-        Create CMakeFiles\\cmTC_8535c.dir/manifest.rc
-        Create empty: CMakeFiles\\cmTC_8535c.dir/embed.manifest
+        Create CMakeFiles\\cmTC_66657.dir/manifest.rc
+        Create empty: CMakeFiles\\cmTC_66657.dir/embed.manifest
         RC Pass 1:
-        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_8535c.dir/manifest.res CMakeFiles\\cmTC_8535c.dir/manifest.rc
+        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_66657.dir/manifest.res CMakeFiles\\cmTC_66657.dir/manifest.rc
         LINK Pass 1:
-        C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_8535c.dir\\objects1.rsp /out:cmTC_8535c.exe /implib:cmTC_8535c.lib /pdb:D:\\Temp\\Project\\EstimatorFrame\\Temp\\build-win\\CMakeFiles\\CMakeScratch\\TryCompile-q5chw8\\cmTC_8535c.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_8535c.dir/intermediate.manifest CMakeFiles\\cmTC_8535c.dir/manifest.res
+        C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_66657.dir\\objects1.rsp /out:cmTC_66657.exe /implib:cmTC_66657.lib /pdb:D:\\Temp\\Project\\EstimatorFrame\\Temp\\build-win\\CMakeFiles\\CMakeScratch\\TryCompile-mmqsjs\\cmTC_66657.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_66657.dir/intermediate.manifest CMakeFiles\\cmTC_66657.dir/manifest.res
         MT:
-        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe /nologo /manifest CMakeFiles\\cmTC_8535c.dir/intermediate.manifest /out:CMakeFiles\\cmTC_8535c.dir/embed.manifest /notify_update
+        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe /nologo /manifest CMakeFiles\\cmTC_66657.dir/intermediate.manifest /out:CMakeFiles\\cmTC_66657.dir/embed.manifest /notify_update
         RC Pass 2:
-        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_8535c.dir/manifest.res CMakeFiles\\cmTC_8535c.dir/manifest.rc
+        C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe /fo CMakeFiles\\cmTC_66657.dir/manifest.res CMakeFiles\\cmTC_66657.dir/manifest.rc
         FINAL LINK:
-        C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_8535c.dir\\objects1.rsp /out:cmTC_8535c.exe /implib:cmTC_8535c.lib /pdb:D:\\Temp\\Project\\EstimatorFrame\\Temp\\build-win\\CMakeFiles\\CMakeScratch\\TryCompile-q5chw8\\cmTC_8535c.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_8535c.dir/intermediate.manifest CMakeFiles\\cmTC_8535c.dir/manifest.res
+        C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo @CMakeFiles\\cmTC_66657.dir\\objects1.rsp /out:cmTC_66657.exe /implib:cmTC_66657.lib /pdb:D:\\Temp\\Project\\EstimatorFrame\\Temp\\build-win\\CMakeFiles\\CMakeScratch\\TryCompile-mmqsjs\\cmTC_66657.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_66657.dir/intermediate.manifest CMakeFiles\\cmTC_66657.dir/manifest.res
         
       exitCode: 0
   -

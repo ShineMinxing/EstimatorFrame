@@ -130,5 +130,17 @@
   "command": "C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP  -ID:\\Temp\\Project\\EstimatorFrame\\Estimator /DWIN32 /D_WINDOWS /GR /EHsc /O2 /Ob2 /DNDEBUG -MD /W3 /EHsc /FoCMakeFiles\\Cpp_DLL_Demo.dir\\Cpp_DLL_Demo.cpp.obj /FdD:\\Temp\\Project\\EstimatorFrame\\Temp\\bin\\ /FS -c D:\\Temp\\Project\\EstimatorFrame\\Cpp_DLL_Demo.cpp",
   "file": "D:/Temp/Project/EstimatorFrame/Cpp_DLL_Demo.cpp",
   "output": "CMakeFiles/Cpp_DLL_Demo.dir/Cpp_DLL_Demo.cpp.obj"
+},
+{
+  "directory": "D:/Temp/Project/EstimatorFrame/Temp/build-win",
+  "command": "C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\cl.exe  /nologo  -ID:\\Temp\\Project\\EstimatorFrame\\Estimator /DWIN32 /D_WINDOWS /O2 /Ob2 /DNDEBUG -MD /W3 /FoCMakeFiles\\C_SO_Demo.dir\\C_SO_Demo.c.obj /FdCMakeFiles\\C_SO_Demo.dir\\ /FS -c D:\\Temp\\Project\\EstimatorFrame\\C_SO_Demo.c",
+  "file": "D:/Temp/Project/EstimatorFrame/C_SO_Demo.c",
+  "output": "CMakeFiles/C_SO_Demo.dir/C_SO_Demo.c.obj"
+},
+{
+  "directory": "D:/Temp/Project/EstimatorFrame/Temp/build-win",
+  "command": "C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP  -ID:\\Temp\\Project\\EstimatorFrame\\Estimator /DWIN32 /D_WINDOWS /GR /EHsc /O2 /Ob2 /DNDEBUG -MD /W3 /EHsc /FoCMakeFiles\\Cpp_SO_Demo.dir\\Cpp_SO_Demo.cpp.obj /FdCMakeFiles\\Cpp_SO_Demo.dir\\ /FS -c D:\\Temp\\Project\\EstimatorFrame\\Cpp_SO_Demo.cpp",
+  "file": "D:/Temp/Project/EstimatorFrame/Cpp_SO_Demo.cpp",
+  "output": "CMakeFiles/Cpp_SO_Demo.dir/Cpp_SO_Demo.cpp.obj"
 }
 ]

@@ -34,7 +34,7 @@ import numpy as np
 # Constants
 INPUT_PATH = "ObservationData/DoubleReflectorTrace/Trace1000.txt"
 OUTPUT_PATH = "EstimationResult"
-DLL_PATH = "Estimator/EstimatorPortN.dll"
+DLL_PATH = "Output/EstimatorPortN.dll"
 DATA_ROWS = 1000
 READ_DATA_COLUMNS = 3
 WRITE_DATA_COLUMNS = 5

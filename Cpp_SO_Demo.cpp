@@ -40,7 +40,7 @@ extern "C" {
 // ---- Macro definitions (Linux 路径用正斜杠) ----
 #define INPUT_PATH  "ObservationData/DoubleReflectorTrace/Trace1000.txt"
 #define OUTPUT_DIR  "EstimationResult"
-#define SO_PATH     "Estimator/EstimatorPortN.so"
+#define SO_PATH     "Output/EstimatorPortN.so"
 
 #define DATA_ROWS             1000
 #define READ_DATA_COLUMNS     3

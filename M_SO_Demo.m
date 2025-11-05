@@ -18,21 +18,14 @@
 
 clear; close all; clc;
 
-% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-% Only compile once. Comment these lines after EstimatorPortN_MatlabSO.mexa64
-% has been generated successfully.
-% For Linux (.so):
-%   - Puts the MEX into: Estimator/EstimatorPortN_MatlabSO.mexa64
-%   - Links against:     Estimator/EstimatorPortN.so
-%   - Sets rpath=$ORIGIN so the MEX can find the .so next to itself.
-
 % 工程根目录（此文件所在目录）
 projRoot = fileparts(mfilename('fullpath'));
 estDir   = fullfile(projRoot, 'Estimator');
+outDir   = fullfile(projRoot, 'Output');
 
 % 路径与目标
 srcCpp   = fullfile(estDir, 'EstimatorPortN_MatlabSO.cpp');
-outBase  = fullfile(estDir, 'EstimatorPortN_MatlabSO');        % 不带扩展名
+outBase  = fullfile(outDir, 'EstimatorPortN_MatlabSO');        % 不带扩展名
 outMex   = [outBase '.' mexext];                               % 带扩展名的完整输出文件
 
 % 仅当 .mexa64 不存在时才编译（第一次）
@@ -42,16 +35,12 @@ if ~exist(outMex, 'file')
         '-v', ...
         ['-I' estDir], ...                         % 头文件路径：Estimator/
         srcCpp, ...                                % 源文件：Estimator/EstimatorPortN_MatlabSO.cpp
-        fullfile(estDir,'EstimatorPortN.so'), ...  % 直接传入 .so 的绝对/相对完整路径
+        fullfile(outDir,'EstimatorPortN.so'), ...  % 直接传入 .so 的绝对/相对完整路径
         "LDFLAGS=$LDFLAGS -Wl,-rpath,'$ORIGIN'", ...  % 运行时在 mex 同目录找 .so
         '-output', outBase);                       % 输出到 Estimator/EstimatorPortN_MatlabSO.mexa64
 end
 
-% !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-addpath(fullfile(pwd, 'Estimator'));
+addpath(fullfile(pwd, 'Output'));
 
 % ========== 常量 ==========
 INPUT_PATH  = fullfile('ObservationData','DoubleReflectorTrace','Trace1000.txt');

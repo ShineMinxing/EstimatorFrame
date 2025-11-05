@@ -171,6 +171,32 @@ Cpp_DLL_Demo\fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_DLL_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_DLL_Demo.dir\build
 .PHONY : Cpp_DLL_Demo\fast
 
+#=============================================================================
+# Target rules for targets named C_SO_Demo
+
+# Build rule for target.
+C_SO_Demo: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) C_SO_Demo
+.PHONY : C_SO_Demo
+
+# fast build rule for target.
+C_SO_Demo\fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\C_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\C_SO_Demo.dir\build
+.PHONY : C_SO_Demo\fast
+
+#=============================================================================
+# Target rules for targets named Cpp_SO_Demo
+
+# Build rule for target.
+Cpp_SO_Demo: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) Cpp_SO_Demo
+.PHONY : Cpp_SO_Demo
+
+# fast build rule for target.
+Cpp_SO_Demo\fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_SO_Demo.dir\build
+.PHONY : Cpp_SO_Demo\fast
+
 C_DLL_Demo.obj: C_DLL_Demo.c.obj
 .PHONY : C_DLL_Demo.obj
 
@@ -219,6 +245,30 @@ C_Demo.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\C_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\C_Demo.dir\C_Demo.c.s
 .PHONY : C_Demo.c.s
 
+C_SO_Demo.obj: C_SO_Demo.c.obj
+.PHONY : C_SO_Demo.obj
+
+# target to build an object file
+C_SO_Demo.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\C_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\C_SO_Demo.dir\C_SO_Demo.c.obj
+.PHONY : C_SO_Demo.c.obj
+
+C_SO_Demo.i: C_SO_Demo.c.i
+.PHONY : C_SO_Demo.i
+
+# target to preprocess a source file
+C_SO_Demo.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\C_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\C_SO_Demo.dir\C_SO_Demo.c.i
+.PHONY : C_SO_Demo.c.i
+
+C_SO_Demo.s: C_SO_Demo.c.s
+.PHONY : C_SO_Demo.s
+
+# target to generate assembly for a file
+C_SO_Demo.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\C_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\C_SO_Demo.dir\C_SO_Demo.c.s
+.PHONY : C_SO_Demo.c.s
+
 Cpp_DLL_Demo.obj: Cpp_DLL_Demo.cpp.obj
 .PHONY : Cpp_DLL_Demo.obj
 
@@ -266,6 +316,30 @@ Cpp_Demo.s: Cpp_Demo.cpp.s
 Cpp_Demo.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_Demo.dir\Cpp_Demo.cpp.s
 .PHONY : Cpp_Demo.cpp.s
+
+Cpp_SO_Demo.obj: Cpp_SO_Demo.cpp.obj
+.PHONY : Cpp_SO_Demo.obj
+
+# target to build an object file
+Cpp_SO_Demo.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_SO_Demo.dir\Cpp_SO_Demo.cpp.obj
+.PHONY : Cpp_SO_Demo.cpp.obj
+
+Cpp_SO_Demo.i: Cpp_SO_Demo.cpp.i
+.PHONY : Cpp_SO_Demo.i
+
+# target to preprocess a source file
+Cpp_SO_Demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_SO_Demo.dir\Cpp_SO_Demo.cpp.i
+.PHONY : Cpp_SO_Demo.cpp.i
+
+Cpp_SO_Demo.s: Cpp_SO_Demo.cpp.s
+.PHONY : Cpp_SO_Demo.s
+
+# target to generate assembly for a file
+Cpp_SO_Demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_SO_Demo.dir\Cpp_SO_Demo.cpp.s
+.PHONY : Cpp_SO_Demo.cpp.s
 
 Estimator\C_Estimators\Estimator1001_Kalman.obj: Estimator\C_Estimators\Estimator1001_Kalman.c.obj
 .PHONY : Estimator\C_Estimators\Estimator1001_Kalman.obj
@@ -457,8 +531,10 @@ help:
 	@echo ... rebuild_cache
 	@echo ... C_DLL_Demo
 	@echo ... C_Demo
+	@echo ... C_SO_Demo
 	@echo ... Cpp_DLL_Demo
 	@echo ... Cpp_Demo
+	@echo ... Cpp_SO_Demo
 	@echo ... EstimatorPortN
 	@echo ... C_DLL_Demo.obj
 	@echo ... C_DLL_Demo.i
@@ -466,12 +542,18 @@ help:
 	@echo ... C_Demo.obj
 	@echo ... C_Demo.i
 	@echo ... C_Demo.s
+	@echo ... C_SO_Demo.obj
+	@echo ... C_SO_Demo.i
+	@echo ... C_SO_Demo.s
 	@echo ... Cpp_DLL_Demo.obj
 	@echo ... Cpp_DLL_Demo.i
 	@echo ... Cpp_DLL_Demo.s
 	@echo ... Cpp_Demo.obj
 	@echo ... Cpp_Demo.i
 	@echo ... Cpp_Demo.s
+	@echo ... Cpp_SO_Demo.obj
+	@echo ... Cpp_SO_Demo.i
+	@echo ... Cpp_SO_Demo.s
 	@echo ... Estimator/C_Estimators/Estimator1001_Kalman.obj
 	@echo ... Estimator/C_Estimators/Estimator1001_Kalman.i
 	@echo ... Estimator/C_Estimators/Estimator1001_Kalman.s

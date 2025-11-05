@@ -37,7 +37,7 @@ from ctypes import *
 ROOT = Path(__file__).resolve().parent
 INPUT_PATH  = ROOT / "ObservationData" / "DoubleReflectorTrace" / "Trace1000.txt"
 OUTPUT_DIR  = ROOT / "EstimationResult"
-SO_PATH     = ROOT / "Estimator" / "EstimatorPortN.so"
+SO_PATH     = ROOT / "Output" / "EstimatorPortN.so"
 
 # ---------------------------
 # Constants (must match model)

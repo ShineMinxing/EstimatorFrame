@@ -57,6 +57,8 @@ all: CMakeFiles\C_Demo.dir\all
 all: CMakeFiles\Cpp_Demo.dir\all
 all: CMakeFiles\C_DLL_Demo.dir\all
 all: CMakeFiles\Cpp_DLL_Demo.dir\all
+all: CMakeFiles\C_SO_Demo.dir\all
+all: CMakeFiles\Cpp_SO_Demo.dir\all
 .PHONY : all
 
 # The main recursive "codegen" target.
@@ -65,6 +67,8 @@ codegen: CMakeFiles\C_Demo.dir\codegen
 codegen: CMakeFiles\Cpp_Demo.dir\codegen
 codegen: CMakeFiles\C_DLL_Demo.dir\codegen
 codegen: CMakeFiles\Cpp_DLL_Demo.dir\codegen
+codegen: CMakeFiles\C_SO_Demo.dir\codegen
+codegen: CMakeFiles\Cpp_SO_Demo.dir\codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -77,6 +81,8 @@ clean: CMakeFiles\C_Demo.dir\clean
 clean: CMakeFiles\Cpp_Demo.dir\clean
 clean: CMakeFiles\C_DLL_Demo.dir\clean
 clean: CMakeFiles\Cpp_DLL_Demo.dir\clean
+clean: CMakeFiles\C_SO_Demo.dir\clean
+clean: CMakeFiles\Cpp_SO_Demo.dir\clean
 .PHONY : clean
 
 #=============================================================================
@@ -86,7 +92,7 @@ clean: CMakeFiles\Cpp_DLL_Demo.dir\clean
 CMakeFiles\EstimatorPortN.dir\all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\EstimatorPortN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\EstimatorPortN.dir\depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\EstimatorPortN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\EstimatorPortN.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=21,22,23,24,25,26,27 "Built target EstimatorPortN"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=25,26,27,28,29,30,31 "Built target EstimatorPortN"
 .PHONY : CMakeFiles\EstimatorPortN.dir\all
 
 # Build rule for subdir invocation for target.
@@ -103,7 +109,7 @@ EstimatorPortN: CMakeFiles\EstimatorPortN.dir\rule
 # codegen rule for target.
 CMakeFiles\EstimatorPortN.dir\codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\EstimatorPortN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\EstimatorPortN.dir\codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=21,22,23,24,25,26,27 "Finished codegen for target EstimatorPortN"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=25,26,27,28,29,30,31 "Finished codegen for target EstimatorPortN"
 .PHONY : CMakeFiles\EstimatorPortN.dir\codegen
 
 # clean rule for target.
@@ -150,7 +156,7 @@ CMakeFiles\C_Demo.dir\clean:
 CMakeFiles\Cpp_Demo.dir\all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_Demo.dir\depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_Demo.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=13,14,15,16,17,18,19,20 "Built target Cpp_Demo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=15,16,17,18,19,20,21,22 "Built target Cpp_Demo"
 .PHONY : CMakeFiles\Cpp_Demo.dir\all
 
 # Build rule for subdir invocation for target.
@@ -167,7 +173,7 @@ Cpp_Demo: CMakeFiles\Cpp_Demo.dir\rule
 # codegen rule for target.
 CMakeFiles\Cpp_Demo.dir\codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_Demo.dir\codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=13,14,15,16,17,18,19,20 "Finished codegen for target Cpp_Demo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=15,16,17,18,19,20,21,22 "Finished codegen for target Cpp_Demo"
 .PHONY : CMakeFiles\Cpp_Demo.dir\codegen
 
 # clean rule for target.
@@ -179,7 +185,7 @@ CMakeFiles\Cpp_Demo.dir\clean:
 # Target rules for target CMakeFiles/C_DLL_Demo.dir
 
 # All Build rule for target.
-CMakeFiles\C_DLL_Demo.dir\all: CMakeFiles\EstimatorPortN.dir\all
+CMakeFiles\C_DLL_Demo.dir\all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\C_DLL_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\C_DLL_Demo.dir\depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\C_DLL_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\C_DLL_Demo.dir\build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=1,2 "Built target C_DLL_Demo"
@@ -187,7 +193,7 @@ CMakeFiles\C_DLL_Demo.dir\all: CMakeFiles\EstimatorPortN.dir\all
 
 # Build rule for subdir invocation for target.
 CMakeFiles\C_DLL_Demo.dir\rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\C_DLL_Demo.dir\all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles 0
 .PHONY : CMakeFiles\C_DLL_Demo.dir\rule
@@ -211,15 +217,15 @@ CMakeFiles\C_DLL_Demo.dir\clean:
 # Target rules for target CMakeFiles/Cpp_DLL_Demo.dir
 
 # All Build rule for target.
-CMakeFiles\Cpp_DLL_Demo.dir\all: CMakeFiles\EstimatorPortN.dir\all
+CMakeFiles\Cpp_DLL_Demo.dir\all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_DLL_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_DLL_Demo.dir\depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_DLL_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_DLL_Demo.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=11,12 "Built target Cpp_DLL_Demo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=13,14 "Built target Cpp_DLL_Demo"
 .PHONY : CMakeFiles\Cpp_DLL_Demo.dir\all
 
 # Build rule for subdir invocation for target.
 CMakeFiles\Cpp_DLL_Demo.dir\rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_DLL_Demo.dir\all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles 0
 .PHONY : CMakeFiles\Cpp_DLL_Demo.dir\rule
@@ -231,13 +237,77 @@ Cpp_DLL_Demo: CMakeFiles\Cpp_DLL_Demo.dir\rule
 # codegen rule for target.
 CMakeFiles\Cpp_DLL_Demo.dir\codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_DLL_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_DLL_Demo.dir\codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=11,12 "Finished codegen for target Cpp_DLL_Demo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=13,14 "Finished codegen for target Cpp_DLL_Demo"
 .PHONY : CMakeFiles\Cpp_DLL_Demo.dir\codegen
 
 # clean rule for target.
 CMakeFiles\Cpp_DLL_Demo.dir\clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_DLL_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_DLL_Demo.dir\clean
 .PHONY : CMakeFiles\Cpp_DLL_Demo.dir\clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/C_SO_Demo.dir
+
+# All Build rule for target.
+CMakeFiles\C_SO_Demo.dir\all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\C_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\C_SO_Demo.dir\depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\C_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\C_SO_Demo.dir\build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=11,12 "Built target C_SO_Demo"
+.PHONY : CMakeFiles\C_SO_Demo.dir\all
+
+# Build rule for subdir invocation for target.
+CMakeFiles\C_SO_Demo.dir\rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\C_SO_Demo.dir\all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles 0
+.PHONY : CMakeFiles\C_SO_Demo.dir\rule
+
+# Convenience name for target.
+C_SO_Demo: CMakeFiles\C_SO_Demo.dir\rule
+.PHONY : C_SO_Demo
+
+# codegen rule for target.
+CMakeFiles\C_SO_Demo.dir\codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\C_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\C_SO_Demo.dir\codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=11,12 "Finished codegen for target C_SO_Demo"
+.PHONY : CMakeFiles\C_SO_Demo.dir\codegen
+
+# clean rule for target.
+CMakeFiles\C_SO_Demo.dir\clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\C_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\C_SO_Demo.dir\clean
+.PHONY : CMakeFiles\C_SO_Demo.dir\clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/Cpp_SO_Demo.dir
+
+# All Build rule for target.
+CMakeFiles\Cpp_SO_Demo.dir\all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_SO_Demo.dir\depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_SO_Demo.dir\build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=23,24 "Built target Cpp_SO_Demo"
+.PHONY : CMakeFiles\Cpp_SO_Demo.dir\all
+
+# Build rule for subdir invocation for target.
+CMakeFiles\Cpp_SO_Demo.dir\rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_SO_Demo.dir\all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles 0
+.PHONY : CMakeFiles\Cpp_SO_Demo.dir\rule
+
+# Convenience name for target.
+Cpp_SO_Demo: CMakeFiles\Cpp_SO_Demo.dir\rule
+.PHONY : Cpp_SO_Demo
+
+# codegen rule for target.
+CMakeFiles\Cpp_SO_Demo.dir\codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_SO_Demo.dir\codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Temp\Project\EstimatorFrame\Temp\build-win\CMakeFiles --progress-num=23,24 "Finished codegen for target Cpp_SO_Demo"
+.PHONY : CMakeFiles\Cpp_SO_Demo.dir\codegen
+
+# clean rule for target.
+CMakeFiles\Cpp_SO_Demo.dir\clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Cpp_SO_Demo.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\Cpp_SO_Demo.dir\clean
+.PHONY : CMakeFiles\Cpp_SO_Demo.dir\clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

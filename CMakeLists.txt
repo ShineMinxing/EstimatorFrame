@@ -23,8 +23,8 @@ file(GLOB_RECURSE CPP_SOURCES_ALL CONFIGURE_DEPENDS
 
 # =========================================================
 # 目标 1：共享库 EstimatorPortN
-#  - Windows : Estimator/EstimatorPortN.dll (+ import lib 到 Estimator/)
-#  - Linux   : Estimator/EstimatorPortN.so
+#  - Windows : Output/EstimatorPortN.dll (+ import lib 到 Output/)
+#  - Linux   : Output/EstimatorPortN.so
 # =========================================================
 add_library(EstimatorPortN SHARED
   ${C_SOURCES_ALL}
@@ -47,8 +47,8 @@ target_compile_features(EstimatorPortN PRIVATE c_std_11 cxx_std_17)
 
 # 产物路径
 set_target_properties(EstimatorPortN PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY            ${ROOT}/Estimator   # Windows .dll
-  LIBRARY_OUTPUT_DIRECTORY            ${ROOT}/Estimator   # Linux  .so
+  RUNTIME_OUTPUT_DIRECTORY            ${ROOT}/Output      # Windows .dll
+  LIBRARY_OUTPUT_DIRECTORY            ${ROOT}/Output      # Linux  .so
   ARCHIVE_OUTPUT_DIRECTORY            ${TBIN}             # Windows .lib / Linux .a
   PDB_OUTPUT_DIRECTORY                ${TBIN}
   COMPILE_PDB_OUTPUT_DIRECTORY        ${TBIN}
@@ -72,13 +72,13 @@ endif()
 # Release 去除 Eigen 调试断言
 target_compile_definitions(EstimatorPortN PRIVATE $<$<CONFIG:Release>:EIGEN_NO_DEBUG>)
 
-# Windows: 复制导入库 EstimatorPortN.lib -> Estimator/（与 dll 放一起）
+# Windows: 复制导入库 EstimatorPortN.lib -> Output/（与 dll 放一起）
 if(MSVC)
   add_custom_command(TARGET EstimatorPortN POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
             $<TARGET_LINKER_FILE:EstimatorPortN>   # 通常是 Temp/bin/EstimatorPortN.lib
-            ${ROOT}/Estimator/
-    COMMENT "Copy EstimatorPortN.lib to Estimator/ (Windows)"
+            ${ROOT}/Output/
+    COMMENT "Copy EstimatorPortN.lib to Output/ (Windows)"
   )
 endif()
 
