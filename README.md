@@ -1,5 +1,5 @@
 **English** | [中文](README.zh-CN.md)
-# EstimatorFrame — Estimation Interfaces & Multi‑Language Calling (High‑Quality Guide)
+# EstimatorFrame — Estimation Interfaces & Multi‑Language Calling
 
 > A unified project for **Windows / Linux** that compiles the estimator core (C/C++) into a shared library and demonstrates how to call it from **C / C++ / Python / MATLAB**. The documentation follows a clear directory convention and one‑click builds via **VS Code Tasks**.
 
