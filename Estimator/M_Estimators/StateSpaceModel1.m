@@ -31,6 +31,7 @@ function StateSpaceModelN = StateSpaceModel1(StateSpaceModelN)
 
     StateSpaceModelN.Int_Par = zeros(100,1);
     StateSpaceModelN.Double_Par = zeros(100,1);
+    StateSpaceModelN.Matrix_Par = zeros(100,1);
 
     % 定义结构体中的函数句柄
     StateSpaceModelN.StateTransitionEquation = @(In_State, StateSpaceModelN) StateSpaceModel1StateTransitionFunction(In_State, StateSpaceModelN);
@@ -64,7 +65,7 @@ function [Out_PredictedState, StateSpaceModelN] = StateSpaceModel1PredictionFunc
 end
 
 function StateSpaceModelN = StateSpaceModel1EstimatorPort(StateSpaceModelN)
-    StateSpaceModelN = Estimator3006(StateSpaceModelN);
+    StateSpaceModelN = Estimator3006_4(StateSpaceModelN);
 end
 
 function StateSpaceModel1EstimatorPortTermination()
