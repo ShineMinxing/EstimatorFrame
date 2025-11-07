@@ -1,4 +1,4 @@
-function StateSpaceModelN = LinearTrajectoryGeneration1(StateSpaceModelN)
+function StateSpaceModelN = LinearTrajectoryGeneration(StateSpaceModelN)
     % 仿真线性轨迹
     % 确保结构体已初始化
     if isempty(StateSpaceModelN)

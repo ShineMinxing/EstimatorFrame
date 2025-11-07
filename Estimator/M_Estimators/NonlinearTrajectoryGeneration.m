@@ -1,4 +1,4 @@
-function StateSpaceModelN = NonlinearTrajectoryGeneration1(StateSpaceModelN)
+function StateSpaceModelN = NonlinearTrajectoryGeneration(StateSpaceModelN)
     % 仿真非线性轨迹
     % 确保结构体已初始化
     if isempty(StateSpaceModelN)

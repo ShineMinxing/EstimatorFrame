@@ -7,9 +7,9 @@ addpath('Estimator/M_Estimators');
 
 % 宏配置
 DATA_ROWS = 3000;
-READ_DATA_COLUMNS = 4;
-WRITE_DATA_COLUMNS = 11;
 State_Dimension = 4;
+READ_DATA_COLUMNS = State_Dimension;
+WRITE_DATA_COLUMNS = 1+State_Dimension;
 % 分配空间
 ReadFileData = zeros(DATA_ROWS, READ_DATA_COLUMNS);
 WriteFileData = zeros(DATA_ROWS, WRITE_DATA_COLUMNS);
@@ -24,12 +24,12 @@ StateSpaceModel1_ = StateSpaceModel1(StateSpaceModel1_);  %StateSpaceModel1_ 调
 ReadFileData(1, StateColumns) = StateSpaceModel1_.Matrix_H *  StateSpaceModel1_.EstimatedState;
 ReadFileData(1, ObserColumns) = StateSpaceModel1_.Matrix_H *  StateSpaceModel1_.EstimatedState;
 for i = 2:DATA_ROWS
-    StateSpaceModel1_ = NonlinearTrajectoryGeneration1(StateSpaceModel1_);
+    StateSpaceModel1_ = NonlinearTrajectoryGeneration(StateSpaceModel1_);
     ReadFileData(i, 1) = ReadFileData(i - 1, 1) + StateSpaceModel1_.Intervel;
     ReadFileData(i, StateColumns) = StateSpaceModel1_.EstimatedState([1,3])';
     ReadFileData(i, ObserColumns) = StateSpaceModel1_.CurrentObservation';
 end
-ReadFileData(:, [2, 3]) =  [repmat( ReadFileData(1, [2, 3]), StateSpaceModel1_.PredictStep, 1 ); ReadFileData(1 : (end - StateSpaceModel1_.PredictStep), [2, 3])];
+ReadFileData(:, StateColumns) =  [repmat( ReadFileData(1, StateColumns), StateSpaceModel1_.PredictStep, 1 ); ReadFileData(1 : (end - StateSpaceModel1_.PredictStep), StateColumns)];
 WriteFileData(:, 1) = ReadFileData(:, 1); % 时间戳
 
 
@@ -43,7 +43,7 @@ for i = 1:DATA_ROWS
     % 使用估计器进行估计并更新结构体
     StateSpaceModel1_ = StateSpaceModel1_.EstimatorPort(StateSpaceModel1_);
     % 构建写入数据
-    WriteFileData(i, 2:5) = StateSpaceModel1_.PredictedState; % 状态
+    WriteFileData(i, 2:(1+State_Dimension)) = StateSpaceModel1_.PredictedState; % 状态
 end
 
 
@@ -64,3 +64,10 @@ fclose(fileID);
 fprintf('Estimation data has been written to %s\n', fullOutputFilePath);
 
 fprintf('Program terminated...\n');
+
+figure(1)
+grid on; hold on;
+plot(ReadFileData(:,StateColumns(1)),ReadFileData(:,StateColumns(2)),"k")
+plot(ReadFileData(:,ObserColumns(1)),ReadFileData(:,ObserColumns(2)),"r.")
+plot(WriteFileData(:,2),WriteFileData(:,2+sqrt(State_Dimension)),"b")
+legend("真实值","观测值","估计值")

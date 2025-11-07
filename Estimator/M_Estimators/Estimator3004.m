@@ -5,12 +5,6 @@ function StateSpaceModelN = Estimator3004(StateSpaceModelN)
         error('State space model is not initialized');
     end
 
-    % Compute the predicted observation
-    [Zpre, ~] = StateSpaceModelN.ObservationEquation(StateSpaceModelN.EstimatedState, StateSpaceModelN);
-    
-    % Compute the Jacobian of the observation function
-    [H, ~] = StateSpaceModelN.ObservationDiffEquation(StateSpaceModelN.EstimatedState, StateSpaceModelN);
-
     % Predict the next state using the state transition function
     [StateSpaceModelN.EstimatedState, ~] = StateSpaceModelN.StateTransitionEquation(StateSpaceModelN.EstimatedState, StateSpaceModelN);
     
@@ -19,6 +13,12 @@ function StateSpaceModelN = Estimator3004(StateSpaceModelN)
     
     % Predict the error covariance
     P_pre = F * StateSpaceModelN.Matrix_P * F' + StateSpaceModelN.Matrix_Q;
+    
+    % Compute the predicted observation
+    [Zpre, ~] = StateSpaceModelN.ObservationEquation(StateSpaceModelN.EstimatedState, StateSpaceModelN);
+    
+    % Compute the Jacobian of the observation function
+    [H, ~] = StateSpaceModelN.ObservationDiffEquation(StateSpaceModelN.EstimatedState, StateSpaceModelN);
 
     % Compute the innovation (observation residual)
     Innovation = StateSpaceModelN.CurrentObservation - Zpre;

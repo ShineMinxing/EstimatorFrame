@@ -1,4 +1,4 @@
-function StateSpaceModelN = LinearTrajectoryGeneration2(StateSpaceModelN)
+function StateSpaceModelN = ModelErrorLinearTrajectoryGeneration(StateSpaceModelN)
     % 仿真有模型误差的线性轨迹
     % 确保结构体已初始化
     if isempty(StateSpaceModelN)

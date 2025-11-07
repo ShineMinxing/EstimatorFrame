@@ -1,6 +1,6 @@
 function StateSpaceModelN = StateSpaceModel1(StateSpaceModelN)
     % 初始化结构体中的变量
-    StateSpaceModelN.PortName = 'Tested Model 1 v0.00';
+    StateSpaceModelN.PortName = '2D Uniform Motion Model';
     StateSpaceModelN.PortIntroduction = 'For Reference';
 
     StateSpaceModelN.Nx = 4;
@@ -29,8 +29,8 @@ function StateSpaceModelN = StateSpaceModel1(StateSpaceModelN)
     StateSpaceModelN.Matrix_Q = eye(StateSpaceModelN.Nx);
     StateSpaceModelN.Matrix_R = eye(StateSpaceModelN.Nz);
 
-    StateSpaceModelN.Int_Par = 1;
-    StateSpaceModelN.Double_Par = 1;
+    StateSpaceModelN.Int_Par = zeros(100,1);
+    StateSpaceModelN.Double_Par = zeros(100,1);
 
     % 定义结构体中的函数句柄
     StateSpaceModelN.StateTransitionEquation = @(In_State, StateSpaceModelN) StateSpaceModel1StateTransitionFunction(In_State, StateSpaceModelN);
@@ -64,7 +64,7 @@ function [Out_PredictedState, StateSpaceModelN] = StateSpaceModel1PredictionFunc
 end
 
 function StateSpaceModelN = StateSpaceModel1EstimatorPort(StateSpaceModelN)
-    StateSpaceModelN = Estimator3001(StateSpaceModelN);
+    StateSpaceModelN = Estimator3006(StateSpaceModelN);
 end
 
 function StateSpaceModel1EstimatorPortTermination()
