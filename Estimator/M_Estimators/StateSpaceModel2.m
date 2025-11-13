@@ -75,15 +75,11 @@ end
 
 
 function [Out_Observation, StateSpaceModelN] = StateSpaceModel2ObservationFunction(In_State, StateSpaceModelN)
-    % h(x) = [x; y]
-    Out_Observation = zeros(StateSpaceModelN.Nz,1);
-    Out_Observation(1) = In_State(1);
-    Out_Observation(2) = In_State(3);
+    Out_Observation = StateSpaceModelN.Matrix_H * In_State;
 end
 
 
 function [Out_Observation, StateSpaceModelN] = StateSpaceModel2ObservationDiffFunction(In_State, StateSpaceModelN)
-    % H = ∂h/∂x
     Out_Observation = [ ...
         1, 0, 0, 0; ...
         0, 0, 1, 0 ...
@@ -107,7 +103,7 @@ end
 
 
 function StateSpaceModelN = StateSpaceModel2EstimatorPort(StateSpaceModelN)
-    StateSpaceModelN = Estimator3004(StateSpaceModelN);
+    StateSpaceModelN = Estimator3009_1(StateSpaceModelN);
 end
 
 function StateSpaceModel2EstimatorPortTermination()

@@ -1,6 +1,6 @@
 function StateSpaceModelN = StateSpaceModel3(StateSpaceModelN)
     % 初始化结构体中的变量
-    StateSpaceModelN.PortName = '2D Uniform Motion Model';
+    StateSpaceModelN.PortName = '3D Uniform Acceleration Model';
     StateSpaceModelN.PortIntroduction = 'For Reference';
 
     StateSpaceModelN.Nx = 9;

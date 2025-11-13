@@ -7,7 +7,12 @@ addpath('Estimator/M_Estimators');
 
 % 宏配置
 DATA_ROWS = 3000;
-State_Dimension = 9;
+
+% 生成观测数据
+StateSpaceModel2_ = struct();
+StateSpaceModel2_ = StateSpaceModel2(StateSpaceModel2_);  %StateSpaceModel2_ 调用初始化函数来初始化全局结构体
+
+State_Dimension = StateSpaceModel2_.Nx;
 READ_DATA_COLUMNS = State_Dimension;
 WRITE_DATA_COLUMNS = 1+State_Dimension;
 % 分配空间
@@ -15,35 +20,32 @@ ReadFileData = zeros(DATA_ROWS, READ_DATA_COLUMNS);
 WriteFileData = zeros(DATA_ROWS, WRITE_DATA_COLUMNS);
 EstimatedState = zeros(DATA_ROWS, State_Dimension);
 
-StateColumns = [2,3,4];
-ObserColumns = [5,6,7];
+StateColumns = [2:1+StateSpaceModel2_.Nz];
+ObserColumns = [2+StateSpaceModel2_.Nz:1+2*StateSpaceModel2_.Nz];
 
-% 生成观测数据
-StateSpaceModel3_ = struct();
-StateSpaceModel3_ = StateSpaceModel3(StateSpaceModel3_);  %StateSpaceModel3_ 调用初始化函数来初始化全局结构体
-ReadFileData(1, StateColumns) = StateSpaceModel3_.Matrix_H *  StateSpaceModel3_.EstimatedState;
-ReadFileData(1, ObserColumns) = StateSpaceModel3_.Matrix_H *  StateSpaceModel3_.EstimatedState;
+ReadFileData(1, StateColumns) = StateSpaceModel2_.Matrix_H *  StateSpaceModel2_.EstimatedState;
+ReadFileData(1, ObserColumns) = StateSpaceModel2_.Matrix_H *  StateSpaceModel2_.EstimatedState;
 for i = 2:DATA_ROWS
-    StateSpaceModel3_ = NonlinearTrajectoryGeneration(StateSpaceModel3_);
-    ReadFileData(i, 1) = ReadFileData(i - 1, 1) + StateSpaceModel3_.Intervel;
-    ReadFileData(i, StateColumns) = StateSpaceModel3_.EstimatedState([1,4,7])';
-    ReadFileData(i, ObserColumns) = StateSpaceModel3_.CurrentObservation';
+    StateSpaceModel2_ = NonlinearTrajectoryGeneration(StateSpaceModel2_);
+    ReadFileData(i, 1) = ReadFileData(i - 1, 1) + StateSpaceModel2_.Intervel;
+    ReadFileData(i, StateColumns) = StateSpaceModel2_.EstimatedState([1:StateSpaceModel2_.Nx/StateSpaceModel2_.Nz:end])';
+    ReadFileData(i, ObserColumns) = StateSpaceModel2_.CurrentObservation';
 end
-ReadFileData(:, StateColumns) =  [repmat( ReadFileData(1, StateColumns), StateSpaceModel3_.PredictStep, 1 ); ReadFileData(1 : (end - StateSpaceModel3_.PredictStep), StateColumns)];
+ReadFileData(:, StateColumns) =  [repmat( ReadFileData(1, StateColumns), StateSpaceModel2_.PredictStep, 1 ); ReadFileData(1 : (end - StateSpaceModel2_.PredictStep), StateColumns)];
 WriteFileData(:, 1) = ReadFileData(:, 1); % 时间戳
 
 
 % 初始化估计器结构体1
-StateSpaceModel3_ = struct();
-StateSpaceModel3_ = StateSpaceModel3(StateSpaceModel3_);  %StateSpaceModel3_ 调用初始化函数来初始化全局结构体
-% 使用 StateSpaceModel3_ 进行估计
+StateSpaceModel2_ = struct();
+StateSpaceModel2_ = StateSpaceModel2(StateSpaceModel2_);  %StateSpaceModel2_ 调用初始化函数来初始化全局结构体
+% 使用 StateSpaceModel2_ 进行估计
 for i = 1:DATA_ROWS
     % 提取观测数据
-    StateSpaceModel3_.CurrentObservation = ReadFileData(i, ObserColumns)';
+    StateSpaceModel2_.CurrentObservation = ReadFileData(i, ObserColumns)';
     % 使用估计器进行估计并更新结构体
-    StateSpaceModel3_ = StateSpaceModel3_.EstimatorPort(StateSpaceModel3_);
+    StateSpaceModel2_ = StateSpaceModel2_.EstimatorPort(StateSpaceModel2_);
     % 构建写入数据
-    WriteFileData(i, 2:(1+State_Dimension)) = StateSpaceModel3_.PredictedState; % 状态
+    WriteFileData(i, 2:(1+State_Dimension)) = StateSpaceModel2_.PredictedState; % 状态
 end
 
 
@@ -69,5 +71,5 @@ figure(1)
 grid on; hold on;
 plot(ReadFileData(:,StateColumns(1)),ReadFileData(:,StateColumns(2)),"k")
 plot(ReadFileData(:,ObserColumns(1)),ReadFileData(:,ObserColumns(2)),"r.")
-plot(WriteFileData(:,2),WriteFileData(:,2+sqrt(State_Dimension)),"b")
+plot(WriteFileData(:,2),WriteFileData(:,2+State_Dimension/length(ObserColumns)),"b")
 legend("真实值","观测值","估计值")

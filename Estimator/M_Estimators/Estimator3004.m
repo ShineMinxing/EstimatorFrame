@@ -1,5 +1,7 @@
 function StateSpaceModelN = Estimator3004(StateSpaceModelN)
-    % Extended Kalman Filter Estimator
+% Extended Kalman Filter Estimator
+% 作者：光电所一室2020级  孙敏行   联系方式：401435318@qq.com
+
     % Ensure the structure is initialized
     if isempty(StateSpaceModelN)
         error('State space model is not initialized');

@@ -32,14 +32,7 @@ Eg_row = (StateSpaceModelN.Double_Par(StateSpaceModelN.Nx+1:2*StateSpaceModelN.N
 M_col  =  StateSpaceModelN.Double_Par(2*StateSpaceModelN.Nx+1:3*StateSpaceModelN.Nx);        % n×1
 Kai2   =  5.991;                                                                             % 标量
 
-% —— 2) 先验等价项 Ppre（以 Re 加权）——
-% Ppre = P − P C' (Re + C P C')^{-1} C P
-Ppre = StateSpaceModelN.Matrix_P ...
-     - StateSpaceModelN.Matrix_P * StateSpaceModelN.Matrix_H' ...
-       / (Re + StateSpaceModelN.Matrix_H * StateSpaceModelN.Matrix_P * StateSpaceModelN.Matrix_H') ...
-       * StateSpaceModelN.Matrix_H * StateSpaceModelN.Matrix_P;
-
-% —— 3) 结构化不确定性鲁棒项（Qe, Rep1, Ae, Be, Λ）——
+% —— 2) 结构化不确定性鲁棒项（Qe, Rep1, Ae, Be, Λ）——
 Qe       = StateSpaceModelN.Matrix_Q;      % 等效过程噪声
 Ae       = StateSpaceModelN.Matrix_F;      % 等效系统矩阵
 Be       = StateSpaceModelN.Matrix_G;      % 等效过程通道（对应 B）
@@ -59,6 +52,14 @@ gamma      = abs(innovation'/sqrt(S));
 if gamma > Kai2
     Re = (gamma / Kai2) * Re;  % 按比例放大量测协方差
 end
+
+% —— 3) 先验等价项 Ppre（以 Re 加权）——
+% Ppre = P − P C' (Re + C P C')^{-1} C P
+Ppre = StateSpaceModelN.Matrix_P ...
+     - StateSpaceModelN.Matrix_P * StateSpaceModelN.Matrix_H' ...
+       / (Re + StateSpaceModelN.Matrix_H * StateSpaceModelN.Matrix_P * StateSpaceModelN.Matrix_H') ...
+       * StateSpaceModelN.Matrix_H * StateSpaceModelN.Matrix_P;
+
 
 if any( (StateSpaceModelN.Matrix_H * M_col) ~= 0 )
     % Λ_min = | M' C' (R \ (C M)) |

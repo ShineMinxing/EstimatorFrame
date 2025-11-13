@@ -1,108 +1,114 @@
 function StateSpaceModelN = Estimator3007(StateSpaceModelN)
-% Estimator3007 — ASTCKF（Adaptive Spherical-Cubature Kalman Filter，自适应球面容积卡尔曼滤波）
-%
-% 功能
-%   对非线性系统执行一次基于容积点（±sqrt(n)·S）的状态估计与协方差更新，并结合 ST 策略进行
-%   观测残差驱动的自适应调整；随后从后验状态出发前视 PredictStep 步，给出 PredictedState 与 PredictedObservation。
+% Estimator3007 — RESP（Error Sensitivity Penalizing）鲁棒状态估计
 %
 % 数学模型
-%   x_{k+1} = f(x_k) + w_k
-%   z_k     = h(x_k) + v_k
-%   其中 w_k ~ N(0, Q)、v_k ~ N(0, R)。
-% 
-% 自适应策略（ST）
-%   残差 e_k = z_k − ẑ_k；以衰减系数 Rou=0.95、阈值参数 Beta=3 构造 Vk 并形成自适应项：
-%       Vk ← (Rou·V_{k−1} + e_k e_k^T)/(1+Rou)（首次时刻）或 Vk ← e_k e_k^T（之后）
-%       N  = Vk − Beta·R − P_xz^T / P_e · Q / P_e · P_xz
-%       M  = P_zz + N − Vk − (1−Beta)·R
-%       若 trace(N)/trace(N) > 1，则对 P_e 施加同尺度放大（与原式一致）
-%   为保持“无中间变量持久化”规范，上一时刻 Vk 保存在 StateSpaceModelN.Double_Par(100)（初值 0）。
+%   x_{k+1} = F x_k + G w_k ,   z_k = H x_k + v_k
+%   参数不确定性通过灵敏度项(S,T)进入等效噪声设计与滤波器系数中
 %
-% 主要步骤
-%   1) 生成容积点：S = chol(Matrix_P, 'lower')，X_i = ±sqrt(n)·S + EstimatedState
-%   2) 传播至 f：得到 RJD_i，计算 Xe、P_e
-%   3) 传播至 h：得到量测容积点，计算 ẑ（=Zei）、P_zz、P_xz
-%   4) ST 自适应：根据 e_k、Rou、Beta 更新 Vk 和放缩因子，对 P_e 进行尺度修正（如需）
-%   5) 更新：K = P_xz / P_zz；EstimatedState ← Xe + K e_k；Matrix_P ← P_e − K P_zz K^T
-%   6) 前视：从后验出发迭代 StateTransitionEquation PredictStep 次；PredictedObservation = Matrix_H * PredictedState（若为纯非线性量测，则可由 ObservationEquation 生成）
+% 方法要点（参见：Robust State Estimation Using Error Sensitivity Penalizing， Tong Zhou, CDC 2008）
+%   同时最小化名义估计误差与误差对参数不确定性的灵敏度：
+%     S = blkrow_k [ PH_k (F + Fep1_k·ε_k·Fep2_k) ;
+%                    (H + Hep1_k·ε_k·Hep2_k) · PF_k ]
+%     T = blkrow_k [ PH_k (G + Gep1_k·ε_k·Gep2_k) ;
+%                    (H + Hep1_k·ε_k·Hep2_k) · PG_k ]
+%   令 ρ = (1-Γ)/Γ：
+%     Q_e = [ Q^{-1} + ρ·T' (I + ρ·S P S') T ]^{-1}
+%     P_e = [ P^{-1} + ρ·S' S ]^{-1}
+%     G_e = G − ρ·F P_e S' S
+%     F_e = (F − ρ·G_e Q_e T' S) · (I − ρ·P_e S' S)
+%     P⁺  = F P_e F' + G_e Q_e G_e'
+%     R_e = R + H P⁺ H'
+%     P   = P⁺ − P⁺ H' / R_e · H P⁺
+%     x̂   = F_e x̂ + P H' / R · ( z − H F_e x̂ )
 %
-% 复杂度
-%   每次递推主要开销为两次 Cholesky 分解与 O(n·m) 的二阶矩运算，整体近似 O(n^3)。
-%
-% 参考文献
-%   10.1109/ACCESS.2020.3013561
-%
-% 作者与联系方式
-%   光电所一室2020级  孙敏行
-%   401435318@qq.com
+% 作者：光电所一室2020级 孙敏行    联系方式：401435318@qq.com
 
 if isempty(StateSpaceModelN)
     error('State space model is not initialized');
 end
-
-% ===== (1) 立方球容积点（基于后验 P） =====
-Ma = [eye(StateSpaceModelN.Nx), -eye(StateSpaceModelN.Nx)];
-Si = chol(StateSpaceModelN.Matrix_P, 'lower');
-Temp = sqrt(StateSpaceModelN.Nx) * Si * Ma + ...
-       repmat(StateSpaceModelN.EstimatedState, 1, 2*StateSpaceModelN.Nx);
-
-% 传播容积点：x_k → f(x_k)
-RJD = zeros(StateSpaceModelN.Nx, 2*StateSpaceModelN.Nx);
-for j = 1:2*StateSpaceModelN.Nx
-    [RJD(:,j), StateSpaceModelN] = StateSpaceModelN.StateTransitionEquation(Temp(:,j), StateSpaceModelN);
+if StateSpaceModelN.Nx ~= 4
+    error('Estimator3007:Nx','This Estimator3007 implementation requires StateSpaceModelN.Nx == 4.');
 end
 
-% 状态预测均值与协方差
-Xe = mean(RJD, 2);
-Pe = (RJD * RJD.')/(2*StateSpaceModelN.Nx) - Xe*Xe.' + StateSpaceModelN.Matrix_Q;
+% ===== 1) 固定 RESP 参数（显式字面量）=====
+% 折中参数 Γ 与 ρ
+Gamma_local = 0.8;
+rho         = (1 - Gamma_local) / Gamma_local;
 
-% ===== (2) 观测预测 =====
-Si = chol(Pe, 'lower');
-Ksi = sqrt(StateSpaceModelN.Nx) * Si * Ma + repmat(Xe, 1, 2*StateSpaceModelN.Nx);
+% 不确定性标量 ε
+eps_local   = -0.8508;
 
-Zpts = zeros(StateSpaceModelN.Nz, 2*StateSpaceModelN.Nx);
-for k = 1:2*StateSpaceModelN.Nx
-    [Zpts(:,k), StateSpaceModelN] = StateSpaceModelN.ObservationEquation(Ksi(:,k), StateSpaceModelN);
-end
-Zei  = mean(Zpts, 2);
-Pizz = (Zpts * Zpts.')/(2*StateSpaceModelN.Nx) - Zei*Zei.' + StateSpaceModelN.Matrix_R;
-Pixz = (Ksi * Zpts.')/(2*StateSpaceModelN.Nx) - Xe*Zei.';
+% 灵敏度矩阵（显式写法；与 2×2 示例一致的“位置取值”扩展到 4×4）
+% PF0 = blkdiag([0 0.0990; 0 0], [0 0.0990; 0 0]);
+PF_k = [ 0      0.0990   0       0;
+         0      0        0       0;
+         0      0        0       0.0990;
+         0      0        0       0 ];
 
-% ===== (3) ST 自适应（Rou=0.95, Beta=3；Vk 持久化在 Double_Par(1)） =====
-e = StateSpaceModelN.CurrentObservation - Zei;
-Rou  = 0.95;
-Beta = 3;
+% FEP1 = [0.0198; 0] 扩展为作用在 X、Y 两个子系统的列向量
+Fep1_k = [ 0.0198; 0; 0.0198; 0 ];
 
-if ~StateSpaceModelN.Double_Par(1)
-    Vk = (Rou * StateSpaceModelN.Double_Par(1)+ e*e.')/(1 + Rou);
-    StateSpaceModelN.Double_Par= Vk;
-else
-    Vk = e*e.';
-    StateSpaceModelN.Double_Par= Vk;
-end
+% FEP2 = [0, 5] 扩展为作用在第2列与第4列的行向量
+Fep2_k = [ 0, 5, 0, 5 ];
 
-N_adapt = Vk - Beta*StateSpaceModelN.Matrix_R ...
-          - (Pixz.'/Pe) * StateSpaceModelN.Matrix_Q / Pe * Pixz;
-M_adapt = Pizz + N_adapt - Vk - (1 - Beta)*StateSpaceModelN.Matrix_R;
+% 其余灵敏度项按脚本设为 0（显式字面量）
+PH_k   = [ 0 0 0 0;
+           0 0 0 0;
+           0 0 0 0;
+           0 0 0 0 ];
 
-Lambda = trace(N_adapt) / trace(N_adapt);
-if Lambda > 1
-    Pe = Pe * Lambda;
-end
+PG_k   = [ 0 0 0 0;
+           0 0 0 0;
+           0 0 0 0;
+           0 0 0 0 ];
 
-% ===== (4) 更新 =====
-Kk = Pixz / (Pizz);
-StateSpaceModelN.EstimatedState = Xe + Kk * e;
-StateSpaceModelN.Matrix_P       = Pe - Kk * Pizz * Kk.';
+Gep1_k = [ 0; 0; 0; 0 ];
+Gep2_k = [ 0, 0, 0, 0 ];
 
-% ===== (5) 前视预测（与 M_Demo 的真值前移对齐）=====
+% H 属于 2×4，本实现不对 H 做秩一扰动（与脚本设为 0 保持一致）
+Hep1_k = [ 0; 0 ];
+Hep2_k = [ 0, 0, 0, 0 ];
+
+% ===== 2) 构造 S、T =====
+Fk = StateSpaceModelN.Matrix_F + Fep1_k * eps_local * Fep2_k;   % 4×4
+Gk = StateSpaceModelN.Matrix_G + Gep1_k * eps_local * Gep2_k;   % 4×4（与常见 G=I_4 一致）
+Hk = StateSpaceModelN.Matrix_H + Hep1_k * eps_local * Hep2_k;   % 2×4（此处即为 H）
+
+% S（(4+2)×4）与 T（(4+2)×4），直接按公式堆叠
+Si = [ PH_k * Fk ;
+       Hk   * PF_k ];
+
+Ti = [ PH_k * Gk ;
+       Hk   * PG_k ];
+
+% ===== 3) 等效噪声/增益（RESP 主公式）=====
+Qe = inv( inv(StateSpaceModelN.Matrix_Q) ...
+      + rho * ( Ti' * ( eye(size(Si,1)) + rho * Si * StateSpaceModelN.Matrix_P * Si' ) * Ti ) );
+
+Pe = inv( inv(StateSpaceModelN.Matrix_P) + rho * ( Si' * Si ) );
+
+Ge = StateSpaceModelN.Matrix_G - rho * StateSpaceModelN.Matrix_F * Pe * (Si' * Si);
+
+Fe = ( StateSpaceModelN.Matrix_F - rho * Ge * Qe * (Ti' * Si) ) ...
+   * ( eye(4) - rho * Pe * (Si' * Si) );
+
+PP = StateSpaceModelN.Matrix_F * Pe * StateSpaceModelN.Matrix_F' + Ge * Qe * Ge';
+
+Re = StateSpaceModelN.Matrix_R + StateSpaceModelN.Matrix_H * PP * StateSpaceModelN.Matrix_H';
+
+StateSpaceModelN.Matrix_P = PP - PP * StateSpaceModelN.Matrix_H' / Re * StateSpaceModelN.Matrix_H * PP;
+
+% ===== 4) 状态更新（测量校正使用名义 R）=====
+innovation = StateSpaceModelN.CurrentObservation - StateSpaceModelN.Matrix_H * (Fe * StateSpaceModelN.EstimatedState);
+StateSpaceModelN.EstimatedState = Fe * StateSpaceModelN.EstimatedState ...
+    + StateSpaceModelN.Matrix_P * StateSpaceModelN.Matrix_H' / StateSpaceModelN.Matrix_R * innovation;
+
+% ===== 5) 前视预测（u=0，保持模板接口一致）=====
 StateSpaceModelN.PredictedState = StateSpaceModelN.EstimatedState;
 if StateSpaceModelN.PredictStep
     for j = 1:StateSpaceModelN.PredictStep
-        [StateSpaceModelN.PredictedState, StateSpaceModelN] = ...
-            StateSpaceModelN.StateTransitionEquation(StateSpaceModelN.PredictedState, StateSpaceModelN);
+        StateSpaceModelN.PredictedState = StateSpaceModelN.Matrix_F * StateSpaceModelN.PredictedState;
     end
 end
-[StateSpaceModelN.PredictedObservation, StateSpaceModelN] = ...
-    StateSpaceModelN.ObservationEquation(StateSpaceModelN.PredictedState, StateSpaceModelN);
+StateSpaceModelN.PredictedObservation = StateSpaceModelN.Matrix_H * StateSpaceModelN.PredictedState;
 end

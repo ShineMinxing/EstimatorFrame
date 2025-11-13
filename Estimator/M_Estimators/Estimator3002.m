@@ -1,5 +1,7 @@
 function StateSpaceModelN = Estimator3002(StateSpaceModelN)
-    % Unscented Kalman Estiamtor
+% Unscented Kalman Estiamtor
+% 作者：光电所一室2020级  孙敏行   联系方式：401435318@qq.com
+
     % 确保结构体已初始化
     if isempty(StateSpaceModelN)
         error('State space model is not initialized');
