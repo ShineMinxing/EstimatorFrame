@@ -54,7 +54,7 @@ function StateSpaceModelN = Estimator3002(StateSpaceModelN)
 
     % 6. 状态和观测预测
     [PredictedState, StateSpaceModelN] = StateSpaceModelN.PredictionEquation(StateSpaceModelN.EstimatedState, StateSpaceModelN);
-    [PredictedObservation, StateSpaceModelN] = StateSpaceModelN.ObservationEquation(StateSpaceModelN.PredictedState, StateSpaceModelN);
+    [PredictedObservation, StateSpaceModelN] = StateSpaceModelN.ObservationEquation(PredictedState, StateSpaceModelN);
     StateSpaceModelN.PredictedState = PredictedState';
     StateSpaceModelN.PredictedObservation = PredictedObservation';
 end

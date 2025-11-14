@@ -43,7 +43,7 @@ function StateSpaceModelN = StateSpaceModel3(StateSpaceModelN)
     StateSpaceModelN.ObservationEquation = @(In_State, StateSpaceModelN) StateSpaceModel3ObservationFunction(In_State, StateSpaceModelN);
     StateSpaceModelN.PredictionEquation = @(In_State, StateSpaceModelN) StateSpaceModel3PredictionFunction(In_State, StateSpaceModelN);
     StateSpaceModelN.EstimatorPort = @(StateSpaceModelN) StateSpaceModel3EstimatorPort(StateSpaceModelN);
-    StateSpaceModelN.EstimatorPortTermination = @() StateSpaceModel3EstimatorPortTermination();
+    StateSpaceModelN.EstimatorPortTermination = @(StateSpaceModelN) StateSpaceModel3EstimatorPortTermination();
 end
 
 % 定义各个函数的实现
@@ -85,6 +85,6 @@ function StateSpaceModelN = StateSpaceModel3EstimatorPort(StateSpaceModelN)
     StateSpaceModelN = Estimator3002(StateSpaceModelN);
 end
 
-function StateSpaceModel3EstimatorPortTermination()
+function StateSpaceModel3EstimatorPortTermination(StateSpaceModelN)
     fprintf('EstimatorPort terminated.\n');
 end
