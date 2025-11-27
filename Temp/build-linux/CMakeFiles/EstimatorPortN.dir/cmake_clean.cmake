@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "../../Output/EstimatorPortN.so"
-  "../bin/EstimatorPortN.pdb"
+  "/home/unitree/WorkSpace/EstimatorFrame/Output/EstimatorPortN.so"
+  "/home/unitree/WorkSpace/EstimatorFrame/Temp/bin/EstimatorPortN.pdb"
   "CMakeFiles/EstimatorPortN.dir/Estimator/C_Estimators/Estimator1001_Kalman.c.o"
   "CMakeFiles/EstimatorPortN.dir/Estimator/C_Estimators/Estimator1001_Kalman.c.o.d"
   "CMakeFiles/EstimatorPortN.dir/Estimator/C_Estimators/Estimator1002_UnscentedKalmanEstiamtor.c.o"

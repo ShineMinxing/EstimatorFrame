@@ -19,7 +19,7 @@
 clear; close all; clc;
 
 % 工程根目录（此文件所在目录）
-projRoot = fileparts(mfilename('fullpath'));
+projRoot = fileparts(fileparts(mfilename('fullpath')));
 estDir   = fullfile(projRoot, 'Estimator');
 outDir   = fullfile(projRoot, 'Output');
 

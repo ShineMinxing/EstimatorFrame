@@ -1,1 +1,1 @@
-/usr/bin/cc -O3 -DNDEBUG CMakeFiles/C_SO_Demo.dir/C_SO_Demo.c.o -o ../../Output/C_SO_Demo  -ldl 
+/usr/bin/cc -O3 -DNDEBUG CMakeFiles/C_SO_Demo.dir/Demo/C_SO_Demo.c.o -o /home/unitree/WorkSpace/EstimatorFrame/Output/C_SO_Demo  -ldl

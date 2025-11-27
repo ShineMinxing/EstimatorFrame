@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "../../Output/C_DLL_Demo"
-  "../bin/C_DLL_Demo.pdb"
-  "CMakeFiles/C_DLL_Demo.dir/C_DLL_Demo.c.o"
-  "CMakeFiles/C_DLL_Demo.dir/C_DLL_Demo.c.o.d"
+  "/home/unitree/WorkSpace/EstimatorFrame/Output/C_DLL_Demo"
+  "/home/unitree/WorkSpace/EstimatorFrame/Temp/bin/C_DLL_Demo.pdb"
+  "CMakeFiles/C_DLL_Demo.dir/Demo/C_DLL_Demo.c.o"
+  "CMakeFiles/C_DLL_Demo.dir/Demo/C_DLL_Demo.c.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

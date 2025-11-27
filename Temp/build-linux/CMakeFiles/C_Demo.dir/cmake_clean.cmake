@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "../../Output/C_Demo"
-  "../bin/C_Demo.pdb"
-  "CMakeFiles/C_Demo.dir/C_Demo.c.o"
-  "CMakeFiles/C_Demo.dir/C_Demo.c.o.d"
+  "/home/unitree/WorkSpace/EstimatorFrame/Output/C_Demo"
+  "/home/unitree/WorkSpace/EstimatorFrame/Temp/bin/C_Demo.pdb"
+  "CMakeFiles/C_Demo.dir/Demo/C_Demo.c.o"
+  "CMakeFiles/C_Demo.dir/Demo/C_Demo.c.o.d"
   "CMakeFiles/C_Demo.dir/Estimator/C_Estimators/Estimator1001_Kalman.c.o"
   "CMakeFiles/C_Demo.dir/Estimator/C_Estimators/Estimator1001_Kalman.c.o.d"
   "CMakeFiles/C_Demo.dir/Estimator/C_Estimators/Estimator1002_UnscentedKalmanEstiamtor.c.o"

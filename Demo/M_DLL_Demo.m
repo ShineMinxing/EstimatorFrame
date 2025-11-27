@@ -24,7 +24,7 @@ clear; close all; clc;
 % !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 % 工程根目录（此文件所在目录）
-projRoot = fileparts(mfilename('fullpath'));
+projRoot = fileparts(fileparts(mfilename('fullpath')));
 estDir   = fullfile(projRoot, 'Estimator');
 outDir   = fullfile(projRoot, 'Output');
 
@@ -47,8 +47,8 @@ if ~exist(outMex, 'file')
 end
 
 % 添加包含 DLL 文件的路径
-addpath(fullfile(fileparts(mfilename('fullpath')), 'Estimator'));
-addpath(fullfile(fileparts(mfilename('fullpath')), 'Output'));
+addpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'Estimator'));
+addpath(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'Output'));
 
 % Define constants
 INPUT_PATH = fullfile('ObservationData', 'DoubleReflectorTrace', 'Trace1000.txt');

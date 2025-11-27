@@ -34,7 +34,7 @@ from ctypes import *
 # ---------------------------
 # Paths (robust to cwd)
 # ---------------------------
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 INPUT_PATH  = ROOT / "ObservationData" / "DoubleReflectorTrace" / "Trace1000.txt"
 OUTPUT_DIR  = ROOT / "EstimationResult"
 SO_PATH     = ROOT / "Output" / "EstimatorPortN.so"

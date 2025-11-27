@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "../../Output/C_SO_Demo"
-  "../../Output/C_SO_Demo.pdb"
-  "CMakeFiles/C_SO_Demo.dir/C_SO_Demo.c.o"
-  "CMakeFiles/C_SO_Demo.dir/C_SO_Demo.c.o.d"
+  "/home/unitree/WorkSpace/EstimatorFrame/Output/C_SO_Demo"
+  "/home/unitree/WorkSpace/EstimatorFrame/Output/C_SO_Demo.pdb"
+  "CMakeFiles/C_SO_Demo.dir/Demo/C_SO_Demo.c.o"
+  "CMakeFiles/C_SO_Demo.dir/Demo/C_SO_Demo.c.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

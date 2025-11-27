@@ -29,7 +29,7 @@
 #include <sys/stat.h>       // stat, mkdir
 #include <sys/types.h>
 #include <errno.h>
-#include "Estimator/EstimatorPortN.h"   // struct EstimatorPortN
+#include "../Estimator/EstimatorPortN.h"   // struct EstimatorPortN
 
 /* ---------------- Macro configuration (Linux paths use '/') ---------------- */
 #define INPUT_PATH  "ObservationData/DoubleReflectorTrace/Trace1000.txt"

@@ -86,7 +86,7 @@ endif()
 # 目标 2：C_Demo（直接编入全部估计器源码）
 # =========================================================
 add_executable(C_Demo
-  ${ROOT}/C_Demo.c
+  ${ROOT}/Demo/C_Demo.c
   ${C_SOURCES_ALL}
   ${CPP_SOURCES_ALL}
 )
@@ -125,7 +125,7 @@ target_compile_definitions(C_Demo PRIVATE $<$<CONFIG:Release>:EIGEN_NO_DEBUG>)
 # 目标 3：Cpp_Demo（直接编入全部估计器源码）
 # =========================================================
 add_executable(Cpp_Demo
-  ${ROOT}/Cpp_Demo.cpp
+  ${ROOT}/Demo/Cpp_Demo.cpp
   ${C_SOURCES_ALL}
   ${CPP_SOURCES_ALL}
 )
@@ -167,7 +167,7 @@ target_compile_definitions(Cpp_Demo PRIVATE $<$<CONFIG:Release>:EIGEN_NO_DEBUG>)
 #  - Linux   请使用 C_SO_Demo（dlopen/dlsym）
 # =========================================================
 add_executable(C_DLL_Demo
-  ${ROOT}/C_DLL_Demo.c
+  ${ROOT}/Demo/C_DLL_Demo.c
 )
 
 target_include_directories(C_DLL_Demo PRIVATE
@@ -198,7 +198,7 @@ endif()
 #  - Linux   请使用 Cpp_SO_Demo（dlopen/dlsym）
 # =========================================================
 add_executable(Cpp_DLL_Demo
-  ${ROOT}/Cpp_DLL_Demo.cpp
+  ${ROOT}/Demo/Cpp_DLL_Demo.cpp
 )
 
 target_include_directories(Cpp_DLL_Demo PRIVATE
@@ -227,7 +227,7 @@ endif()
 #  - 使用 dlopen/dlsym；需链接 -ldl
 # =========================================================
 add_executable(C_SO_Demo
-  ${ROOT}/C_SO_Demo.c
+  ${ROOT}/Demo/C_SO_Demo.c
 )
 target_include_directories(C_SO_Demo PRIVATE
   ${ROOT}/Estimator
@@ -252,7 +252,7 @@ endif()
 #  - 使用 dlopen/dlsym；需链接 -ldl
 # =========================================================
 add_executable(Cpp_SO_Demo
-  ${ROOT}/Cpp_SO_Demo.cpp
+  ${ROOT}/Demo/Cpp_SO_Demo.cpp
 )
 target_include_directories(Cpp_SO_Demo PRIVATE
   ${ROOT}/Estimator

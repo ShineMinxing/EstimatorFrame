@@ -1,15 +1,13 @@
 /*
 % ===========================================================================
-% Filename: C_Demo.c
+% Filename: C_DLL_Demo.c
 % Description:
+% 
+% A demo for demonstrating how to call estimator port in dll form.
 %
-% A demo for demonstrating how to call estimator port in .c form.
+% Estimator\EstimatorPortN.dll and Estimator\EstimatorPortN.lib are used.
 %
-% All source files in \Estimator and its subdirectory are used. 
-% Make sure there is at least one estimator method in the subdirectory, like 
-% Estimator1001_Kalman.c and Estimator1001_Kalman.h.
-%
-% Mainly use .vscode\tasks.json and .vscode\build_cpp_dll_demo.bat to compile
+% Mainly use .vscode\tasks.json and .vscode\build_c_dll_demo.bat to compile
 %
 % Initial version: Minxing Sun
 % Unit: UCAS, Institute of Optics And Electronics, Lab 1, Class of 2020
@@ -27,16 +25,23 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "Estimator/EstimatorPortN.h"
+#include "../Estimator/EstimatorPortN.h"
 
 // Macro configuration
 #define INPUT_PATH "ObservationData/DoubleReflectorTrace/Trace1000.txt"
 #define OUTPUT_PATH "EstimationResult"
+#define DLL_PATH "Output/EstimatorPortN.dll"
 #define DATA_ROWS 1000
 #define READ_DATA_COLUMNS 3
 #define WRITE_DATA_COLUMNS 5
 #define Observation_Dimension 2
 #define State_Dimension 4
+
+// For Using dll file
+#include <windows.h>
+typedef void (*EP_Initialization_Type)(struct EstimatorPortN *);
+typedef void (*EP_EstimatorPort_Type)(double *, double *, struct EstimatorPortN *);
+typedef void (*EP_Termination_Type)(struct EstimatorPortN *);
 
 void readDataToObservation(double ReadFileData[DATA_ROWS][READ_DATA_COLUMNS]) {
 
@@ -59,7 +64,7 @@ void readDataToObservation(double ReadFileData[DATA_ROWS][READ_DATA_COLUMNS]) {
 }
 
 void WriteDataToFile(double WriteFileData[DATA_ROWS][WRITE_DATA_COLUMNS]) {
-
+    
     char fullOutputFilePath[260];
     time_t rawtime;
     struct tm *timeinfo;
@@ -94,8 +99,26 @@ int main() {
     double WriteFileData[DATA_ROWS][WRITE_DATA_COLUMNS];
     double EstimatorObservation[DATA_ROWS][Observation_Dimension];
     double EstimatedState[DATA_ROWS][State_Dimension];
-
+    
     readDataToObservation(ReadFileData);
+
+    // Load DLL
+    HMODULE hEstimatorDll = LoadLibrary(DLL_PATH);
+    if (hEstimatorDll == NULL) {
+        perror("Unable to load EstimatorPortN.dll");
+        return EXIT_FAILURE;
+    }
+    // Obtain DLL ffunction pointer
+    EP_Initialization_Type StateSpaceModel1_Initialization = (EP_Initialization_Type)GetProcAddress(hEstimatorDll, "StateSpaceModel1_Initialization");
+    EP_EstimatorPort_Type StateSpaceModel1_EstimatorPort = (EP_EstimatorPort_Type)GetProcAddress(hEstimatorDll, "StateSpaceModel1_EstimatorPort");
+    EP_Termination_Type StateSpaceModel1_EstimatorPortTermination = (EP_Termination_Type)GetProcAddress(hEstimatorDll, "StateSpaceModel1_EstimatorPortTermination");
+    if (!StateSpaceModel1_Initialization || !StateSpaceModel1_EstimatorPort || !StateSpaceModel1_EstimatorPortTermination) {
+        perror("Unable to find required functions in DLL");
+        FreeLibrary(hEstimatorDll);
+        return EXIT_FAILURE;
+    }
+    // Initiate EstimatorPortN struct
+    EstimatorPortN StateSpaceModel1_;
 
     // StateSpaceModel1_ based estimation
     StateSpaceModel1_Initialization(&StateSpaceModel1_);
@@ -110,8 +133,10 @@ int main() {
         }
     }
     StateSpaceModel1_EstimatorPortTermination(&StateSpaceModel1_);
+    FreeLibrary(hEstimatorDll);
     printf("StateSpaceModel1_ finished...\n");
     // StateSpaceModel1_ based estimation
+
     
     WriteDataToFile(WriteFileData);
 
