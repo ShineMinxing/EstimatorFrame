@@ -10,9 +10,9 @@
 % 
 % You can see "EXPORT extern EstimatorPortN StateSpaceModel1_;" below. 
 % Of course you can:
-% 1. Define more StateSpaceModel2_ StateSpaceModel3_... in this h file.
-% 2. Copy more Estimator\StateSpaceModel1.c and name them with StateSpaceModel2.cpp...
-% 3. Replace all "StateSpaceModel1_" to "StateSpaceModel2_" in "StateSpaceModel2.cpp", and you can define more 
+% 1. Define more StateSpaceModel_Go2_ StateSpaceModel3_... in this h file.
+% 2. Copy more Estimator\StateSpaceModel1.c and name them with StateSpaceModel_Go2.cpp...
+% 3. Replace all "StateSpaceModel1_" to "StateSpaceModel_Go2_" in "StateSpaceModel_Go2.cpp", and you can define more 
 %     linear or nonlinear state space model.
 % 4. If you want to use different estimamtor to realize a StateSpaceModelN, replace all 
 %     "Estimator1001_" to "EstimatorXXXX_", which is defined in your EstimatorXXXX_XXXXX.c/EstimatorXXXX_XXXXX.cpp.
@@ -49,6 +49,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #ifdef _WIN32
     #define EXPORT __declspec(dllexport)
@@ -58,6 +59,10 @@
 
 #ifdef __cplusplus
 extern "C" {
+#endif
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
 #endif
 
 
@@ -71,6 +76,9 @@ typedef struct EstimatorPortN {
     int PredictStep;
     double Intervel;
     double PredictTime;
+    double CurrentTimestamp;
+    double StateUpdateTimestamp;
+    double ObservationTimestamp;
 
     // Matrix
     // xi+1 = F*xi + G*B + w
@@ -100,13 +108,13 @@ typedef struct EstimatorPortN {
 // And then, copy StateSpaceModel1.c, and substitute all StateSpaceModel1_ in it to StateSpaceModelN_
 EXPORT extern EstimatorPortN StateSpaceModel1_;
 EXPORT void StateSpaceModel1_Initialization(struct EstimatorPortN *estimator);
-EXPORT void StateSpaceModel1_EstimatorPort(double *In_Observation, double *Out_State, struct EstimatorPortN *estimator);
+EXPORT void StateSpaceModel1_EstimatorPort(double *In_Observation, double In_Observation_Timestamp, struct EstimatorPortN *estimator);
 EXPORT void StateSpaceModel1_EstimatorPortTermination(struct EstimatorPortN *estimator);
 
-EXPORT extern EstimatorPortN StateSpaceModel2_;
-EXPORT void StateSpaceModel2_Initialization(struct EstimatorPortN *estimator);
-EXPORT void StateSpaceModel2_EstimatorPort(double *In_Observation, double *Out_State, struct EstimatorPortN *estimator);
-EXPORT void StateSpaceModel2_EstimatorPortTermination(struct EstimatorPortN *estimator);
+EXPORT extern EstimatorPortN StateSpaceModel_Go2_;
+EXPORT void StateSpaceModel_Go2_Initialization(struct EstimatorPortN *estimator);
+EXPORT void StateSpaceModel_Go2_EstimatorPort(double *In_Observation, double In_Observation_Timestamp, struct EstimatorPortN *estimator);
+EXPORT void StateSpaceModel_Go2_EstimatorPortTermination(struct EstimatorPortN *estimator);
 
 #ifdef __cplusplus
 }
