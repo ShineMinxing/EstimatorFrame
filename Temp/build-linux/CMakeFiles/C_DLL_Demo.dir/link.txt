@@ -1,1 +1,0 @@
-/usr/bin/cc -O3 -DNDEBUG CMakeFiles/C_DLL_Demo.dir/Demo/C_DLL_Demo.c.o -o /home/unitree/WorkSpace/EstimatorFrame/Output/C_DLL_Demo
