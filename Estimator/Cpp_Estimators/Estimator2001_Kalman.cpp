@@ -1,6 +1,6 @@
 #include "Estimator2001_Kalman.h"
 #include <iostream>
-#include "Cpp_Estimators/Eigen/Dense"
+#include "Eigen/Dense"
 
 using namespace Eigen;
 

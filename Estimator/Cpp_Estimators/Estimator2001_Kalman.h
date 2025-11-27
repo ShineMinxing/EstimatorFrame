@@ -24,7 +24,7 @@
 extern "C" {
 #endif
 
-#include "EstimatorPortN.h"
+#include "../EstimatorPortN.h"
 
 void Estimator2001_Init(EstimatorPortN *estimator);
 void Estimator2001_Estimation(EstimatorPortN *estimator);

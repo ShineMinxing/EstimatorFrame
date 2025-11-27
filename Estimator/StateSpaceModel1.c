@@ -1,42 +1,56 @@
 // If you want to test another Estimator, substitue EstimatorXXXX_ to your estimator
 
 #include "EstimatorPortN.h"
+#include "Cpp_Estimators/Estimator2001_Kalman.h"
+#include "Cpp_Estimators/Estimator2002_UnscentedKalmanEstiamtor.h"
 
 EstimatorPortN StateSpaceModel1_;
 
 void StateSpaceModel1_StateTransitionFunction(double *In_State, double *Out_State, struct EstimatorPortN *estimator) {
-    Out_State[0] = In_State[0] + estimator->Intervel * In_State[1];
-    Out_State[1] = In_State[1];
-    Out_State[2] = In_State[2] + estimator->Intervel * In_State[3];
-    Out_State[3] = In_State[3];
+
+    estimator->Intervel = estimator->CurrentTimestamp - estimator->StateUpdateTimestamp;
+
+	for (int i = 0; i < 3; i++)
+	{
+		Out_State[i * 3 + 0] = In_State[i * 3 + 0] + In_State[i * 3 + 1] * estimator->Intervel + In_State[i * 3 + 2] * estimator->Intervel * estimator->Intervel /2;
+		Out_State[i * 3 + 1] = In_State[i * 3 + 1] + In_State[i * 3 + 2] * estimator->Intervel;
+		Out_State[i * 3 + 2] = In_State[i * 3 + 2];
+	}
+    printf("Error");
 }
 
 void StateSpaceModel1_ObservationFunction(double *In_State, double *Out_Observation, EstimatorPortN *estimator) {
-    Out_Observation[0] = In_State[0] + estimator->Intervel * In_State[1];
-    Out_Observation[1] = In_State[2] + estimator->Intervel * In_State[3];
+
+    Out_Observation[0] = In_State[0];
+    Out_Observation[1] = In_State[3];
+    Out_Observation[2] = In_State[6];
+
+    printf("Error");
 }
 
 void StateSpaceModel1_PredictionFunction(double *In_State, double *Out_PredictedState, EstimatorPortN *estimator) {
-    Out_PredictedState[0] = In_State[0] + estimator->PredictTime * In_State[1];
-    Out_PredictedState[1] = In_State[1];
-    Out_PredictedState[2] = In_State[2] + estimator->PredictTime * In_State[3];
-    Out_PredictedState[3] = In_State[3];
+	for (int i = 0; i < 3; i++)
+	{
+		Out_PredictedState[i * 3 + 0] = In_State[i * 3 + 0] + In_State[i * 3 + 1] * estimator->PredictTime + In_State[i * 3 + 2] * estimator->PredictTime * estimator->PredictTime /2;
+		Out_PredictedState[i * 3 + 1] = In_State[i * 3 + 1] + In_State[i * 3 + 2] * estimator->PredictTime;
+		Out_PredictedState[i * 3 + 2] = In_State[i * 3 + 2];
+	}
+    printf("Error");
 }
 
-EXPORT void StateSpaceModel1_EstimatorPort(double *In_Observation, double *Out_State, struct EstimatorPortN *estimator) {
+EXPORT void StateSpaceModel1_EstimatorPort(double *In_Observation, double In_Observation_Timestamp, struct EstimatorPortN *estimator) {
 	for (int i = 0; i < estimator->Nz; i++)
 	{
 		estimator->CurrentObservation[i] = In_Observation[i];
 	}
-    Estimator1001_Estimation(estimator);
-	for (int i = 0; i < estimator->Nx; i++)
-	{
-		Out_State[i] = estimator->EstimatedState[i];
-	}
+    estimator->ObservationTimestamp = In_Observation_Timestamp;
+    estimator->CurrentTimestamp = In_Observation_Timestamp;
+    Estimator2001_Estimation(estimator);
+    estimator->StateUpdateTimestamp = estimator->CurrentTimestamp;
 }
 
 EXPORT void StateSpaceModel1_EstimatorPortTermination(struct EstimatorPortN *estimator) {
-    Estimator1001_Termination();
+    Estimator2001_Termination();
 
     free(estimator->PortName);
     estimator->PortName = NULL;
@@ -74,61 +88,97 @@ EXPORT void StateSpaceModel1_EstimatorPortTermination(struct EstimatorPortN *est
 
 EXPORT void StateSpaceModel1_Initialization(EstimatorPortN *estimator) 
 {
-    char *PortNameTemp = "Tested Estimator v0.00";
+    char *PortNameTemp = "Estimator for position or orientation";
     char *PortIntroductionTemp = "For Reference";
 
-    #define StateSpaceModel1_NX 4
-    #define StateSpaceModel1_NZ 2
-    #define StateSpaceModel1_PredictStep 2
-    #define StateSpaceModel1_Interval 0.005
-    #define StateSpaceModel1_PredictTime 0.01
- 
+    #define StateSpaceModel1_NX 9
+    #define StateSpaceModel1_NZ 9
+    #define StateSpaceModel1_PredictStep 0
+    #define StateSpaceModel1_Interval 0.0015
+    #define StateSpaceModel1_PredictTime 0
+    #define StateSpaceModel1_ObservationTimestamp 0
+
     double X0[StateSpaceModel1_NX] = {\
-    1,0,1,0\
+    0,0,0, 0,0,0, 0,0,0\
     };
     double F[StateSpaceModel1_NX*StateSpaceModel1_NX] = {\
-    1,StateSpaceModel1_Interval,0,0,\
-    0,1,0,0,\
-    0,0,1,StateSpaceModel1_Interval,\
-    0,0,0,1\
+    1,StateSpaceModel1_Interval,StateSpaceModel1_Interval*StateSpaceModel1_Interval/2, 0,0,0, 0,0,0,\
+    0,1,StateSpaceModel1_Interval, 0,0,0, 0,0,0,\
+    0,0,1, 0,0,0, 0,0,0,\
+    0,0,0, 1,StateSpaceModel1_Interval,StateSpaceModel1_Interval*StateSpaceModel1_Interval/2, 0,0,0, \
+    0,0,0, 0,1,StateSpaceModel1_Interval, 0,0,0,\
+    0,0,0, 0,0,1, 0,0,0,\
+    0,0,0, 0,0,0, 1,StateSpaceModel1_Interval,StateSpaceModel1_Interval*StateSpaceModel1_Interval/2, \
+    0,0,0, 0,0,0, 0,1,StateSpaceModel1_Interval,\
+    0,0,0, 0,0,0, 0,0,1,\
     };
     double G[StateSpaceModel1_NX*StateSpaceModel1_NX] = {\
-    1,0,0,0,\
-    0,1,0,0,\
-    0,0,1,0,\
-    0,0,0,1\
+    1,StateSpaceModel1_Interval,StateSpaceModel1_Interval*StateSpaceModel1_Interval/2, 0,0,0, 0,0,0,\
+    0,1,StateSpaceModel1_Interval, 0,0,0, 0,0,0,\
+    0,0,1, 0,0,0, 0,0,0,\
+    0,0,0, 1,StateSpaceModel1_Interval,StateSpaceModel1_Interval*StateSpaceModel1_Interval/2, 0,0,0, \
+    0,0,0, 0,1,StateSpaceModel1_Interval, 0,0,0,\
+    0,0,0, 0,0,1, 0,0,0,\
+    0,0,0, 0,0,0, 1,StateSpaceModel1_Interval,StateSpaceModel1_Interval*StateSpaceModel1_Interval/2, \
+    0,0,0, 0,0,0, 0,1,StateSpaceModel1_Interval,\
+    0,0,0, 0,0,0, 0,0,1,\
     };
     double B[StateSpaceModel1_NX] = {\
-    0,0,0,0\
+    0,0,0,0,0,0,0,0,0\
     };
     double H[StateSpaceModel1_NZ*StateSpaceModel1_NX] = {\
-    1,0,0,0,\
-    0,0,1,0,\
+    0,0,0,0,0,0,0,0,0,\
+    0,0,0,0,0,0,0,0,0,\
+    0,0,0,0,0,0,0,0,0,\
+    0,0,0,0,0,0,0,0,0,\
+    0,0,0,0,0,0,0,0,0,\
+    0,0,0,0,0,0,0,0,0,\
+    0,0,0,0,0,0,0,0,0,\
+    0,0,0,0,0,0,0,0,0,\
+    0,0,0,0,0,0,0,0,0\
     };
     double P[StateSpaceModel1_NX*StateSpaceModel1_NX] = {\
-    1,0,0,0,\
-    0,1,0,0,\
-    0,0,1,0,\
-    0,0,0,1\
+    1,0,0,0,0,0,0,0,0,\
+    0,1,0,0,0,0,0,0,0,\
+    0,0,1,0,0,0,0,0,0,\
+    0,0,0,1,0,0,0,0,0,\
+    0,0,0,0,1,0,0,0,0,\
+    0,0,0,0,0,1,0,0,0,\
+    0,0,0,0,0,0,1,0,0,\
+    0,0,0,0,0,0,0,1,0,\
+    0,0,0,0,0,0,0,0,1,\
     };
     double Q[StateSpaceModel1_NX*StateSpaceModel1_NX] = {\
-    1,0,0,0,\
-    0,1,0,0,\
-    0,0,1,0,\
-    0,0,0,1\
+    1,0,0,0,0,0,0,0,0,\
+    0,1,0,0,0,0,0,0,0,\
+    0,0,1,0,0,0,0,0,0,\
+    0,0,0,1,0,0,0,0,0,\
+    0,0,0,0,1,0,0,0,0,\
+    0,0,0,0,0,1,0,0,0,\
+    0,0,0,0,0,0,1,0,0,\
+    0,0,0,0,0,0,0,1,0,\
+    0,0,0,0,0,0,0,0,1\
     };
     double R[StateSpaceModel1_NZ*StateSpaceModel1_NZ] = {\
-    1,0,\
-    0,1\
+    1,0,0,0,0,0,0,0,0,\
+    0,1,0,0,0,0,0,0,0,\
+    0,0,1,0,0,0,0,0,0,\
+    0,0,0,1,0,0,0,0,0,\
+    0,0,0,0,1,0,0,0,0,\
+    0,0,0,0,0,1,0,0,0,\
+    0,0,0,0,0,0,1,0,0,\
+    0,0,0,0,0,0,0,1,0,\
+    0,0,0,0,0,0,0,0,1\
     };
-    double Int_Par[1] = {1};
-    double Double_Par[1] = {1};
+    double Int_Par[100] = {0};
+    double Double_Par[100] = {0};
 
     estimator->Nx = StateSpaceModel1_NX;
     estimator->Nz = StateSpaceModel1_NZ;
     estimator->PredictStep = StateSpaceModel1_PredictStep;
     estimator->Intervel = StateSpaceModel1_Interval;
     estimator->PredictTime = StateSpaceModel1_PredictTime;
+    estimator->ObservationTimestamp = StateSpaceModel1_ObservationTimestamp;
 
     estimator->PortName = (char *)malloc(100);
     estimator->PortIntroduction = (char *)malloc(1000);
@@ -143,8 +193,8 @@ EXPORT void StateSpaceModel1_Initialization(EstimatorPortN *estimator)
     estimator->Matrix_P = (double *)malloc(estimator->Nx * estimator->Nx * sizeof(double));
     estimator->Matrix_Q = (double *)malloc(estimator->Nx * estimator->Nx * sizeof(double));
     estimator->Matrix_R = (double *)malloc(estimator->Nz * estimator->Nz * sizeof(double));
-    estimator->Int_Par = (int *)malloc(1 * sizeof(int));
-    estimator->Double_Par = (double *)malloc(1 * sizeof(double));
+    estimator->Int_Par = (int *)malloc(100 * sizeof(int));
+    estimator->Double_Par = (double *)malloc(100 * sizeof(double));
     if (estimator->PortName == NULL || estimator->PortIntroduction == NULL ||\
         estimator->EstimatedState == NULL || estimator->PredictedState == NULL ||\
         estimator->CurrentObservation == NULL || estimator->PredictedObservation == NULL ||\
@@ -168,8 +218,8 @@ EXPORT void StateSpaceModel1_Initialization(EstimatorPortN *estimator)
     memcpy(estimator->Matrix_P, P, estimator->Nx * estimator->Nx * sizeof(double));
     memcpy(estimator->Matrix_Q, Q, estimator->Nx * estimator->Nx * sizeof(double));
     memcpy(estimator->Matrix_R, R, estimator->Nz * estimator->Nz * sizeof(double));
-    memcpy(estimator->Int_Par, Int_Par, 1 * sizeof(int));
-    memcpy(estimator->Double_Par, Double_Par, 1 * sizeof(double));
+    memcpy(estimator->Int_Par, Int_Par, 100 * sizeof(int));
+    memcpy(estimator->Double_Par, Double_Par, 100 * sizeof(double));
 
     // Initiate pointer
     estimator->StateTransitionEquation = StateSpaceModel1_StateTransitionFunction;
@@ -178,5 +228,5 @@ EXPORT void StateSpaceModel1_Initialization(EstimatorPortN *estimator)
 
     printf("%s is initialized\n", estimator->PortName);
 
-    Estimator1001_Init(estimator);
+    Estimator2001_Init(estimator);
 }
