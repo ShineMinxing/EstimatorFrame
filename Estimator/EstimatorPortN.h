@@ -111,6 +111,11 @@ EXPORT void StateSpaceModel1_Initialization(struct EstimatorPortN *estimator);
 EXPORT void StateSpaceModel1_EstimatorPort(double *In_Observation, double In_Observation_Timestamp, struct EstimatorPortN *estimator);
 EXPORT void StateSpaceModel1_EstimatorPortTermination(struct EstimatorPortN *estimator);
 
+EXPORT extern EstimatorPortN StateSpaceModel_Demo_;
+EXPORT void StateSpaceModel_Demo_Initialization(struct EstimatorPortN *estimator);
+EXPORT void StateSpaceModel_Demo_EstimatorPort(double *In_Observation, double In_Observation_Timestamp, struct EstimatorPortN *estimator);
+EXPORT void StateSpaceModel_Demo_EstimatorPortTermination(struct EstimatorPortN *estimator);
+
 EXPORT extern EstimatorPortN StateSpaceModel_Go2_;
 EXPORT void StateSpaceModel_Go2_Initialization(struct EstimatorPortN *estimator);
 EXPORT void StateSpaceModel_Go2_EstimatorPort(double *In_Observation, double In_Observation_Timestamp, struct EstimatorPortN *estimator);

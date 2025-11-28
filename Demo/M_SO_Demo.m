@@ -68,7 +68,8 @@ WriteFileData  = zeros(DATA_ROWS, WRITE_DATA_COLUMNS);
 % ========== 逐步估计 ==========
 for i = 1:DATA_ROWS
     observation = ReadFileData(i, 2:3)';              % [z1; z2]
-    xhat = EstimatorPortN_MatlabSO('estimate', observation); % Nx x 1
+    tstamp      = ReadFileData(i, 1);       
+    xhat = EstimatorPortN_MatlabSO('estimate', observation, tstamp); % Nx x 1
     EstimatedState(i,:) = xhat(:).';
     WriteFileData(i,:)  = [ReadFileData(i,1) xhat(:).'];
 end

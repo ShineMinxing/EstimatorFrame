@@ -70,17 +70,22 @@ class EstimatorPortN(Structure):
 StateTransitionEquationType = CFUNCTYPE(None, POINTER(c_double), c_double, POINTER(c_double), POINTER(EstimatorPortN))
 ObservationEquationType     = CFUNCTYPE(None, POINTER(c_double), POINTER(c_double), POINTER(EstimatorPortN))
 PredictionEquationType      = CFUNCTYPE(None, POINTER(c_double), c_double, POINTER(c_double), POINTER(EstimatorPortN))
-EstimatorPortFuncType       = CFUNCTYPE(None, POINTER(c_double), POINTER(c_double), POINTER(EstimatorPortN))
+EstimatorPortFuncType       = CFUNCTYPE(None, POINTER(c_double), c_double, POINTER(EstimatorPortN))
 EstimatorPortTerminationType= CFUNCTYPE(None, POINTER(EstimatorPortN))
 
 EstimatorPortN._fields_ = [
     ('PortName', c_char_p),
     ('PortIntroduction', c_char_p),
+
     ('Nx', c_int),
     ('Nz', c_int),
     ('PredictStep', c_int),
     ('Intervel', c_double),
     ('PredictTime', c_double),
+    ('CurrentTimestamp', c_double),
+    ('StateUpdateTimestamp', c_double),
+    ('ObservationTimestamp', c_double),
+
     ('EstimatedState', POINTER(c_double)),
     ('PredictedState', POINTER(c_double)),
     ('CurrentObservation', POINTER(c_double)),
@@ -92,29 +97,30 @@ EstimatorPortN._fields_ = [
     ('Matrix_P', POINTER(c_double)),
     ('Matrix_Q', POINTER(c_double)),
     ('Matrix_R', POINTER(c_double)),
-    ("Int_Par", POINTER(c_int)),
-    ("Double_Par", POINTER(c_double)),
+
+    ('Int_Par', POINTER(c_int)),
+    ('Double_Par', POINTER(c_double)),
+
     ('StateTransitionEquation', StateTransitionEquationType),
     ('ObservationEquation',     ObservationEquationType),
     ('PredictionEquation',      PredictionEquationType),
-    ('EstimatorPort',           EstimatorPortFuncType),
-    ('EstimatorPortTermination',EstimatorPortTerminationType),
 ]
+
 
 # ---------------------------
 # Bind C functions
 # ---------------------------
-# void StateSpaceModel1_Initialization(struct EstimatorPortN *);
-estimator_so.StateSpaceModel1_Initialization.argtypes = [POINTER(EstimatorPortN)]
-estimator_so.StateSpaceModel1_Initialization.restype  = None
+# void StateSpaceModel_Demo_Initialization(struct EstimatorPortN *);
+estimator_so.StateSpaceModel_Demo_Initialization.argtypes = [POINTER(EstimatorPortN)]
+estimator_so.StateSpaceModel_Demo_Initialization.restype  = None
 
-# void StateSpaceModel1_EstimatorPort(double *obs, double *state, struct EstimatorPortN *);
-estimator_so.StateSpaceModel1_EstimatorPort.argtypes = [POINTER(c_double), POINTER(c_double), POINTER(EstimatorPortN)]
-estimator_so.StateSpaceModel1_EstimatorPort.restype  = None
+# void StateSpaceModel_Demo_EstimatorPort(double *obs, double *state, struct EstimatorPortN *);
+estimator_so.StateSpaceModel_Demo_EstimatorPort.argtypes = [POINTER(c_double), c_double, POINTER(EstimatorPortN)]
+estimator_so.StateSpaceModel_Demo_EstimatorPort.restype  = None
 
-# void StateSpaceModel1_EstimatorPortTermination(struct EstimatorPortN *);
-estimator_so.StateSpaceModel1_EstimatorPortTermination.argtypes = [POINTER(EstimatorPortN)]
-estimator_so.StateSpaceModel1_EstimatorPortTermination.restype  = None
+# void StateSpaceModel_Demo_EstimatorPortTermination(struct EstimatorPortN *);
+estimator_so.StateSpaceModel_Demo_EstimatorPortTermination.argtypes = [POINTER(EstimatorPortN)]
+estimator_so.StateSpaceModel_Demo_EstimatorPortTermination.restype  = None
 
 def main():
     # ---------------------------
@@ -147,24 +153,23 @@ def main():
     # ---------------------------
     # Create and initialize estimator
     # ---------------------------
-    ep = EstimatorPortN()
-    estimator_so.StateSpaceModel1_Initialization(byref(ep))
+    StateSpaceModel = EstimatorPortN()
+    estimator_so.StateSpaceModel_Demo_Initialization(byref(StateSpaceModel))
 
     # ---------------------------
     # Process rows
     # ---------------------------
     for i in range(DATA_ROWS):
         obs_ptr   = EstimatorObservation[i].ctypes.data_as(POINTER(c_double))
-        state_ptr = EstimatedState[i].ctypes.data_as(POINTER(c_double))
-        estimator_so.StateSpaceModel1_EstimatorPort(obs_ptr, state_ptr, byref(ep))
+        estimator_so.StateSpaceModel_Demo_EstimatorPort(obs_ptr, c_double(TimeData[i]), byref(StateSpaceModel))
 
         WriteFileData[i, 0]  = TimeData[i]
-        WriteFileData[i, 1:] = EstimatedState[i]
+        WriteFileData[i, 1:] = np.ctypeslib.as_array(StateSpaceModel.EstimatedState, shape=(StateSpaceModel.Nx,))
 
     # ---------------------------
     # Termination
     # ---------------------------
-    estimator_so.StateSpaceModel1_EstimatorPortTermination(byref(ep))
+    estimator_so.StateSpaceModel_Demo_EstimatorPortTermination(byref(StateSpaceModel))
 
     # ---------------------------
     # Write output

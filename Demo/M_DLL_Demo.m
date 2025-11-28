@@ -81,7 +81,8 @@ for i = 1:DATA_ROWS
     observation = ReadFileData(i, 2:3)';
     
     % Call the estimation function
-    estimatedState = EstimatorPortN_MatlabDLL('estimate', observation);
+    tstamp = ReadFileData(i, 1);
+    estimatedState = EstimatorPortN_MatlabDLL('estimate', observation, tstamp);
     
     % Store results
     EstimatedState(i, :) = estimatedState';

@@ -45,7 +45,7 @@
 /* ---------------- Types of the functions exported by the .so ----------------
    Signatures must match the implementation inside EstimatorPortN */
 typedef void (*EP_Initialization_Type)(struct EstimatorPortN *);
-typedef void (*EP_EstimatorPort_Type)(double *, double *, struct EstimatorPortN *);
+typedef void (*EP_EstimatorPort_Type)(double *, double, struct EstimatorPortN *);
 typedef void (*EP_Termination_Type)(struct EstimatorPortN *);
 
 /* ----------------------------- Small utilities ----------------------------- */
@@ -123,7 +123,6 @@ int main(void)
     double ReadFileData[DATA_ROWS][READ_DATA_COLUMNS];
     double WriteFileData[DATA_ROWS][WRITE_DATA_COLUMNS];
     double EstimatorObservation[DATA_ROWS][Observation_Dimension];
-    double EstimatedState[DATA_ROWS][State_Dimension];
 
     readDataToObservation(ReadFileData);
 
@@ -137,12 +136,12 @@ int main(void)
     }
 
     /* 3) Resolve required symbols */
-    EP_Initialization_Type StateSpaceModel1_Initialization =
-        (EP_Initialization_Type)dlsym(handle, "StateSpaceModel1_Initialization");
-    EP_EstimatorPort_Type StateSpaceModel1_EstimatorPort =
-        (EP_EstimatorPort_Type)dlsym(handle, "StateSpaceModel1_EstimatorPort");
-    EP_Termination_Type StateSpaceModel1_EstimatorPortTermination =
-        (EP_Termination_Type)dlsym(handle, "StateSpaceModel1_EstimatorPortTermination");
+    EP_Initialization_Type StateSpaceModel_Demo_Initialization =
+        (EP_Initialization_Type)dlsym(handle, "StateSpaceModel_Demo_Initialization");
+    EP_EstimatorPort_Type StateSpaceModel_Demo_EstimatorPort =
+        (EP_EstimatorPort_Type)dlsym(handle, "StateSpaceModel_Demo_EstimatorPort");
+    EP_Termination_Type StateSpaceModel_Demo_EstimatorPortTermination =
+        (EP_Termination_Type)dlsym(handle, "StateSpaceModel_Demo_EstimatorPortTermination");
 
     const char* err = dlerror();
     if (err) {
@@ -150,15 +149,15 @@ int main(void)
         dlclose(handle);
         return EXIT_FAILURE;
     }
-    if (!StateSpaceModel1_Initialization || !StateSpaceModel1_EstimatorPort || !StateSpaceModel1_EstimatorPortTermination) {
+    if (!StateSpaceModel_Demo_Initialization || !StateSpaceModel_Demo_EstimatorPort || !StateSpaceModel_Demo_EstimatorPortTermination) {
         fprintf(stderr, "Required functions not found in %s\n", SO_PATH);
         dlclose(handle);
         return EXIT_FAILURE;
     }
 
     /* 4) Run estimation exactly like Windows version */
-    struct EstimatorPortN StateSpaceModel1_;
-    StateSpaceModel1_Initialization(&StateSpaceModel1_);
+    struct EstimatorPortN StateSpaceModel_Demo_;
+    StateSpaceModel_Demo_Initialization(&StateSpaceModel_Demo_);
 
     for (int i = 0; i < DATA_ROWS; ++i) {
         /* columns 1..2 -> observation[0..1] */
@@ -167,18 +166,18 @@ int main(void)
         }
 
         /* call estimator; state goes into EstimatedState[i] */
-        StateSpaceModel1_EstimatorPort(EstimatorObservation[i], EstimatedState[i], &StateSpaceModel1_);
+        StateSpaceModel_Demo_EstimatorPort(EstimatorObservation[i], ReadFileData[i][0], &StateSpaceModel_Demo_);
 
         /* time in col0; estimated state in cols 1..4 */
         WriteFileData[i][0] = ReadFileData[i][0];
         for (int j = 0; j < State_Dimension; ++j) {
-            WriteFileData[i][j + 1] = EstimatedState[i][j];
+            WriteFileData[i][j + 1] = StateSpaceModel_Demo_.EstimatedState[j];
         }
     }
 
-    StateSpaceModel1_EstimatorPortTermination(&StateSpaceModel1_);
+    StateSpaceModel_Demo_EstimatorPortTermination(&StateSpaceModel_Demo_);
     dlclose(handle);
-    printf("StateSpaceModel1_ finished...\n");
+    printf("StateSpaceModel_Demo_ finished...\n");
 
     /* 5) Dump output */
     writeEstimationToFile(WriteFileData);

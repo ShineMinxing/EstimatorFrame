@@ -29,25 +29,21 @@
 */
 
 #include "/home/unitree/software/matlab/extern/include/mex.h"
+// ======= 仅替换整文件里这部分 =======
 #include <cstring>
 
-// --- Ensure Windows-specific EXPORT doesn't break Linux build ---
 #ifdef EXPORT
 #  undef EXPORT
 #endif
 #define EXPORT /* empty on Linux */
 
-// Include the estimator port API.
-// If the header uses extern "C" guards internally, great;
-// otherwise we wrap here to avoid C++ name mangling.
 extern "C" {
 #include "EstimatorPortN.h"
 }
 
-// A single global estimator instance (mirrors your C/C++ demos)
-static EstimatorPortN g_StateSpaceModel1;
+// 全局实例
+static EstimatorPortN g_StateSpaceModel_Demo;
 
-// Helper: check input count/type
 static void requireStringCmd(int nrhs, const mxArray *prhs[]) {
     if (nrhs < 1 || !mxIsChar(prhs[0])) {
         mexErrMsgIdAndTxt("EstimatorPortN:badInput",
@@ -59,22 +55,20 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
     requireStringCmd(nrhs, prhs);
 
-    // Fetch command
     char cmd[64] = {0};
     mxGetString(prhs[0], cmd, sizeof(cmd)-1);
 
     if (std::strcmp(cmd, "initialize") == 0) {
-        StateSpaceModel1_Initialization(&g_StateSpaceModel1);
-        if (nlhs > 0) {
-            plhs[0] = mxCreateLogicalScalar(true);
-        }
+        StateSpaceModel_Demo_Initialization(&g_StateSpaceModel_Demo);
+        if (nlhs > 0) plhs[0] = mxCreateLogicalScalar(true);
         return;
     }
 
     if (std::strcmp(cmd, "estimate") == 0) {
-        if (nrhs != 2) {
+        // 现在需要两个实参：obs 向量 + 时间戳
+        if (nrhs != 3) {
             mexErrMsgIdAndTxt("EstimatorPortN:badInput",
-                              "'estimate' requires one argument: observation vector (Nz x 1 or 1 x Nz).");
+                              "'estimate' requires 2 args: observation (Nz) and timestamp (double).");
         }
 
         const mxArray *obsArr = prhs[1];
@@ -83,29 +77,38 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
                               "Observation must be real double.");
         }
 
-        // Expect length == Nz
         mwSize nEl = mxGetNumberOfElements(obsArr);
-        if (static_cast<int>(nEl) != g_StateSpaceModel1.Nz) {
+        if (static_cast<int>(nEl) != g_StateSpaceModel_Demo.Nz) {
             mexErrMsgIdAndTxt("EstimatorPortN:dim",
-                              "Observation length (%d) does not match Nz (%d).",
-                              static_cast<int>(nEl), g_StateSpaceModel1.Nz);
+                              "Observation length (%d) != Nz (%d).",
+                              static_cast<int>(nEl), g_StateSpaceModel_Demo.Nz);
         }
 
-        // Prepare output xhat (Nx x 1)
-        plhs[0] = mxCreateDoubleMatrix(g_StateSpaceModel1.Nx, 1, mxREAL);
+        // 读取时间戳（标量 double）
+        if (!mxIsDouble(prhs[2]) || mxGetNumberOfElements(prhs[2]) != 1) {
+            mexErrMsgIdAndTxt("EstimatorPortN:time",
+                              "Timestamp must be a scalar double.");
+        }
+        double tstamp = *mxGetPr(prhs[2]);
 
-        double *obs = mxGetPr(obsArr);
+        // 输出 xhat（Nx x 1）
+        plhs[0] = mxCreateDoubleMatrix(g_StateSpaceModel_Demo.Nx, 1, mxREAL);
         double *xhat = mxGetPr(plhs[0]);
 
-        StateSpaceModel1_EstimatorPort(obs, xhat, &g_StateSpaceModel1);
+        // 调用新版 C 接口：第二参数是时间戳
+        double *obs = mxGetPr(obsArr);
+        StateSpaceModel_Demo_EstimatorPort(obs, tstamp, &g_StateSpaceModel_Demo);
+
+        // 从结构体里拷贝 EstimatedState 到 xhat
+        for (int k = 0; k < g_StateSpaceModel_Demo.Nx; ++k) {
+            xhat[k] = g_StateSpaceModel_Demo.EstimatedState[k];
+        }
         return;
     }
 
     if (std::strcmp(cmd, "terminate") == 0) {
-        StateSpaceModel1_EstimatorPortTermination(&g_StateSpaceModel1);
-        if (nlhs > 0) {
-            plhs[0] = mxCreateLogicalScalar(true);
-        }
+        StateSpaceModel_Demo_EstimatorPortTermination(&g_StateSpaceModel_Demo);
+        if (nlhs > 0) plhs[0] = mxCreateLogicalScalar(true);
         return;
     }
 

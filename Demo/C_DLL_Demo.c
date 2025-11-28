@@ -40,7 +40,7 @@
 // For Using dll file
 #include <windows.h>
 typedef void (*EP_Initialization_Type)(struct EstimatorPortN *);
-typedef void (*EP_EstimatorPort_Type)(double *, double *, struct EstimatorPortN *);
+typedef void (*EP_EstimatorPort_Type)(double *, double, struct EstimatorPortN *);
 typedef void (*EP_Termination_Type)(struct EstimatorPortN *);
 
 void readDataToObservation(double ReadFileData[DATA_ROWS][READ_DATA_COLUMNS]) {
@@ -98,7 +98,6 @@ int main() {
     double ReadFileData[DATA_ROWS][READ_DATA_COLUMNS];
     double WriteFileData[DATA_ROWS][WRITE_DATA_COLUMNS];
     double EstimatorObservation[DATA_ROWS][Observation_Dimension];
-    double EstimatedState[DATA_ROWS][State_Dimension];
     
     readDataToObservation(ReadFileData);
 
@@ -109,33 +108,33 @@ int main() {
         return EXIT_FAILURE;
     }
     // Obtain DLL ffunction pointer
-    EP_Initialization_Type StateSpaceModel1_Initialization = (EP_Initialization_Type)GetProcAddress(hEstimatorDll, "StateSpaceModel1_Initialization");
-    EP_EstimatorPort_Type StateSpaceModel1_EstimatorPort = (EP_EstimatorPort_Type)GetProcAddress(hEstimatorDll, "StateSpaceModel1_EstimatorPort");
-    EP_Termination_Type StateSpaceModel1_EstimatorPortTermination = (EP_Termination_Type)GetProcAddress(hEstimatorDll, "StateSpaceModel1_EstimatorPortTermination");
-    if (!StateSpaceModel1_Initialization || !StateSpaceModel1_EstimatorPort || !StateSpaceModel1_EstimatorPortTermination) {
+    EP_Initialization_Type StateSpaceModel_Demo_Initialization = (EP_Initialization_Type)GetProcAddress(hEstimatorDll, "StateSpaceModel_Demo_Initialization");
+    EP_EstimatorPort_Type StateSpaceModel_Demo_EstimatorPort = (EP_EstimatorPort_Type)GetProcAddress(hEstimatorDll, "StateSpaceModel_Demo_EstimatorPort");
+    EP_Termination_Type StateSpaceModel_Demo_EstimatorPortTermination = (EP_Termination_Type)GetProcAddress(hEstimatorDll, "StateSpaceModel_Demo_EstimatorPortTermination");
+    if (!StateSpaceModel_Demo_Initialization || !StateSpaceModel_Demo_EstimatorPort || !StateSpaceModel_Demo_EstimatorPortTermination) {
         perror("Unable to find required functions in DLL");
         FreeLibrary(hEstimatorDll);
         return EXIT_FAILURE;
     }
     // Initiate EstimatorPortN struct
-    EstimatorPortN StateSpaceModel1_;
+    EstimatorPortN StateSpaceModel_Demo_;
 
-    // StateSpaceModel1_ based estimation
-    StateSpaceModel1_Initialization(&StateSpaceModel1_);
+    // StateSpaceModel_Demo_ based estimation
+    StateSpaceModel_Demo_Initialization(&StateSpaceModel_Demo_);
     for (int i = 0; i < DATA_ROWS; i++) {
         for (int j = 0; j < Observation_Dimension; j++) {
             EstimatorObservation[i][j] = ReadFileData[i][j+1];
         }
-        StateSpaceModel1_EstimatorPort(EstimatorObservation[i], EstimatedState[i], &StateSpaceModel1_);
+        StateSpaceModel_Demo_EstimatorPort(EstimatorObservation[i], ReadFileData[i][0], &StateSpaceModel_Demo_);
         WriteFileData[i][0] = ReadFileData[i][0];
         for (int j = 0; j < State_Dimension; j++) {
-            WriteFileData[i][j+1] = EstimatedState[i][j];
+            WriteFileData[i][j+1] = StateSpaceModel_Demo_.EstimatedState[j];
         }
     }
-    StateSpaceModel1_EstimatorPortTermination(&StateSpaceModel1_);
+    StateSpaceModel_Demo_EstimatorPortTermination(&StateSpaceModel_Demo_);
     FreeLibrary(hEstimatorDll);
-    printf("StateSpaceModel1_ finished...\n");
-    // StateSpaceModel1_ based estimation
+    printf("StateSpaceModel_Demo_ finished...\n");
+    // StateSpaceModel_Demo_ based estimation
 
     
     WriteDataToFile(WriteFileData);

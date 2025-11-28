@@ -42,7 +42,7 @@
 #include "EstimatorPortN.h"
 
 // Global variables
-EstimatorPortN StateSpaceModel1_;
+EstimatorPortN StateSpaceModel_Demo_;
 
 // MEX function
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
@@ -57,34 +57,45 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 
     if (strcmp(command, "initialize") == 0) {
         // Initialize the estimator
-        StateSpaceModel1_Initialization(&StateSpaceModel1_);
+        StateSpaceModel_Demo_Initialization(&StateSpaceModel_Demo_);
 
         // Return success
         plhs[0] = mxCreateLogicalScalar(true);
 
-    } else if (strcmp(command, "estimate") == 0) {
+    } 
+    else if (strcmp(command, "estimate") == 0) {
         // Check for proper number of arguments
-        if (nrhs != 2)
-            mexErrMsgTxt("Estimate command requires the observation data as input.");
+        if (nrhs != 3)
+            mexErrMsgTxt("'estimate' requires: observation (vector) and timestamp (double).");
 
         // Get the observation data
         double *observation = mxGetPr(prhs[1]);
         size_t obsLength = mxGetNumberOfElements(prhs[1]);
 
-        if (obsLength != (size_t)StateSpaceModel1_.Nz) {
+        if (obsLength != (size_t)StateSpaceModel_Demo_.Nz) {
             mexErrMsgTxt("Observation data size does not match Nz.");
         }
 
+        // Get timestamp
+        if (!mxIsDouble(prhs[2]) || mxGetNumberOfElements(prhs[2]) != 1) {
+            mexErrMsgTxt("Timestamp must be a scalar double.");
+        }
+        double tstamp = *mxGetPr(prhs[2]);
+
         // Prepare output
-        plhs[0] = mxCreateDoubleMatrix(StateSpaceModel1_.Nx, 1, mxREAL);
+        plhs[0] = mxCreateDoubleMatrix(StateSpaceModel_Demo_.Nx, 1, mxREAL);
         double *estimatedState = mxGetPr(plhs[0]);
 
         // Call the EstimatorPort function
-        StateSpaceModel1_EstimatorPort(observation, estimatedState, &StateSpaceModel1_);
+        StateSpaceModel_Demo_EstimatorPort(observation, tstamp, &StateSpaceModel_Demo_);
+
+        for (int k = 0; k < StateSpaceModel_Demo_.Nx; ++k) {
+            estimatedState[k] = StateSpaceModel_Demo_.EstimatedState[k];
+        }
 
     } else if (strcmp(command, "terminate") == 0) {
         // Call the EstimatorPortTermination function
-        StateSpaceModel1_EstimatorPortTermination(&StateSpaceModel1_);
+        StateSpaceModel_Demo_EstimatorPortTermination(&StateSpaceModel_Demo_);
 
         // Return success
         plhs[0] = mxCreateLogicalScalar(true);

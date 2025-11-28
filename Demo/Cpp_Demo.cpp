@@ -105,25 +105,24 @@ int main() {
     double ReadFileData[DATA_ROWS][READ_DATA_COLUMNS];
     double WriteFileData[DATA_ROWS][WRITE_DATA_COLUMNS];
     double EstimatorObservation[DATA_ROWS][Observation_Dimension];
-    double EstimatedState[DATA_ROWS][State_Dimension];
 
     readDataToObservation(ReadFileData);
 
-    // StateSpaceModel1_ based estimation
-    StateSpaceModel1_Initialization(&StateSpaceModel1_);
+    // StateSpaceModel_Demo_ based estimation
+    StateSpaceModel_Demo_Initialization(&StateSpaceModel_Demo_);
     for (int i = 0; i < DATA_ROWS; ++i) {
         for (int j = 0; j < Observation_Dimension; ++j) {
             EstimatorObservation[i][j] = ReadFileData[i][j + 1];
         }
-        StateSpaceModel1_EstimatorPort(EstimatorObservation[i], EstimatedState[i], &StateSpaceModel1_);
+        StateSpaceModel_Demo_EstimatorPort(EstimatorObservation[i], ReadFileData[i][0], &StateSpaceModel_Demo_);
         WriteFileData[i][0] = ReadFileData[i][0];
         for (int j = 0; j < State_Dimension; ++j) {
-            WriteFileData[i][j + 1] = EstimatedState[i][j];
+            WriteFileData[i][j+1] = StateSpaceModel_Demo_.EstimatedState[j];
         }
     }
-    StateSpaceModel1_EstimatorPortTermination(&StateSpaceModel1_);
-    std::cout << "StateSpaceModel1_ finished..." << std::endl;
-    // StateSpaceModel1_ based estimation
+    StateSpaceModel_Demo_EstimatorPortTermination(&StateSpaceModel_Demo_);
+    std::cout << "StateSpaceModel_Demo_ finished..." << std::endl;
+    // StateSpaceModel_Demo_ based estimation
 
     WriteDataToFile(WriteFileData);
 
