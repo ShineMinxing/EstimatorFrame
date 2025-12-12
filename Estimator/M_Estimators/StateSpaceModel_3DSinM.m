@@ -103,7 +103,7 @@ function [Out_PredictedState, StateSpaceModelN] = StateSpaceModel_3DSinMPredicti
 end
 
 function StateSpaceModelN = StateSpaceModel_3DSinMEstimatorPort(StateSpaceModelN)
-    StateSpaceModelN = Estimator3002(StateSpaceModelN);
+    StateSpaceModelN = Estimator3011_1(StateSpaceModelN);
 end
 
 function StateSpaceModel_3DSinMEstimatorPortTermination(StateSpaceModelN)
