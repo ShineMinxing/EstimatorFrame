@@ -1,4 +1,4 @@
-function StateSpaceModelN = StateSpaceModel2(StateSpaceModelN)
+function StateSpaceModelN = StateSpaceModel_2DDMM(StateSpaceModelN)
     % 2D Quadratic Drag Motion Model with Acceleration States
     % 状态: [x; vx; ax; y; vy; ay]
     % Double_Par(1:4) = [m, c_d, a_ext_x, a_ext_y]
@@ -53,24 +53,24 @@ function StateSpaceModelN = StateSpaceModel2(StateSpaceModelN)
 
     % 函数句柄
     StateSpaceModelN.StateTransitionEquation     = ...
-        @(In_State, StateSpaceModelN) StateSpaceModel2StateTransitionFunction(In_State, StateSpaceModelN);
+        @(In_State, StateSpaceModelN) StateSpaceModel_2DDMMStateTransitionFunction(In_State, StateSpaceModelN);
     StateSpaceModelN.StateTransitionDiffEquation = ...
-        @(In_State, StateSpaceModelN) StateSpaceModel2StateTransitionDiffFunction(In_State, StateSpaceModelN);
+        @(In_State, StateSpaceModelN) StateSpaceModel_2DDMMStateTransitionDiffFunction(In_State, StateSpaceModelN);
     StateSpaceModelN.ObservationEquation         = ...
-        @(In_State, StateSpaceModelN) StateSpaceModel2ObservationFunction(In_State, StateSpaceModelN);
+        @(In_State, StateSpaceModelN) StateSpaceModel_2DDMMObservationFunction(In_State, StateSpaceModelN);
     StateSpaceModelN.ObservationDiffEquation     = ...
-        @(In_State, StateSpaceModelN) StateSpaceModel2ObservationDiffFunction(In_State, StateSpaceModelN);
+        @(In_State, StateSpaceModelN) StateSpaceModel_2DDMMObservationDiffFunction(In_State, StateSpaceModelN);
     StateSpaceModelN.PredictionEquation          = ...
-        @(In_State, StateSpaceModelN) StateSpaceModel2PredictionFunction(In_State, StateSpaceModelN);
+        @(In_State, StateSpaceModelN) StateSpaceModel_2DDMMPredictionFunction(In_State, StateSpaceModelN);
     StateSpaceModelN.EstimatorPort               = ...
-        @(StateSpaceModelN) StateSpaceModel2EstimatorPort(StateSpaceModelN);
+        @(StateSpaceModelN) StateSpaceModel_2DDMMEstimatorPort(StateSpaceModelN);
     StateSpaceModelN.EstimatorPortTermination    = ...
-        @(StateSpaceModelN) StateSpaceModel2EstimatorPortTermination(StateSpaceModelN);
+        @(StateSpaceModelN) StateSpaceModel_2DDMMEstimatorPortTermination(StateSpaceModelN);
 end
 
 
 % ============ 非线性状态转移（考虑阻力 + 显式加速度） ============
-function [Out_State, StateSpaceModelN] = StateSpaceModel2StateTransitionFunction(In_State, StateSpaceModelN)
+function [Out_State, StateSpaceModelN] = StateSpaceModel_2DDMMStateTransitionFunction(In_State, StateSpaceModelN)
     % 状态定义: x = [x; vx; ax; y; vy; ay]
     Out_State = zeros(StateSpaceModelN.Nx,1);
     dt = StateSpaceModelN.Intervel;
@@ -112,7 +112,7 @@ end
 
 
 % ============ 状态转移雅可比矩阵 F = ∂f/∂x（在 In_State 处） ============
-function [Out_State, StateSpaceModelN] = StateSpaceModel2StateTransitionDiffFunction(In_State, StateSpaceModelN)
+function [Out_State, StateSpaceModelN] = StateSpaceModel_2DDMMStateTransitionDiffFunction(In_State, StateSpaceModelN)
     % 输出为 6x6 雅可比矩阵
     dt = StateSpaceModelN.Intervel;
 
@@ -191,31 +191,31 @@ function [Out_State, StateSpaceModelN] = StateSpaceModel2StateTransitionDiffFunc
     Out_State = F;
 end
 
-function [Out_Observation, StateSpaceModelN] = StateSpaceModel2ObservationFunction(In_State, StateSpaceModelN)
+function [Out_Observation, StateSpaceModelN] = StateSpaceModel_2DDMMObservationFunction(In_State, StateSpaceModelN)
     Out_Observation = StateSpaceModelN.Matrix_H * In_State;
 end
 
-function [Out_Observation, StateSpaceModelN] = StateSpaceModel2ObservationDiffFunction(In_State, StateSpaceModelN)
+function [Out_Observation, StateSpaceModelN] = StateSpaceModel_2DDMMObservationDiffFunction(In_State, StateSpaceModelN)
     % 观测只量 x,y -> 对应状态 1 和 4
     Out_Observation = zeros(StateSpaceModelN.Nz, StateSpaceModelN.Nx);
     Out_Observation(1,1) = 1;
     Out_Observation(2,4) = 1;
 end
 
-function [Out_PredictedState, StateSpaceModelN] = StateSpaceModel2PredictionFunction(In_State, StateSpaceModelN)
+function [Out_PredictedState, StateSpaceModelN] = StateSpaceModel_2DDMMPredictionFunction(In_State, StateSpaceModelN)
     Out_PredictedState = In_State;
     if StateSpaceModelN.PredictStep
         for k = 1:StateSpaceModelN.PredictStep
             [Out_PredictedState, StateSpaceModelN] = ...
-                StateSpaceModel2StateTransitionFunction(Out_PredictedState, StateSpaceModelN);
+                StateSpaceModel_2DDMMStateTransitionFunction(Out_PredictedState, StateSpaceModelN);
         end
     end
 end
 
-function StateSpaceModelN = StateSpaceModel2EstimatorPort(StateSpaceModelN)
+function StateSpaceModelN = StateSpaceModel_2DDMMEstimatorPort(StateSpaceModelN)
     StateSpaceModelN = Estimator3009(StateSpaceModelN);
 end
 
-function StateSpaceModel2EstimatorPortTermination(StateSpaceModelN)
+function StateSpaceModel_2DDMMEstimatorPortTermination(StateSpaceModelN)
     fprintf('EstimatorPort terminated.\n');
 end

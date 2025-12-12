@@ -1,4 +1,4 @@
-function StateSpaceModelN = StateSpaceModel3(StateSpaceModelN)
+function StateSpaceModelN = StateSpaceModel_3DUAM(StateSpaceModelN)
     % 初始化结构体中的变量
     StateSpaceModelN.PortName = '3D Uniform Acceleration Model';
     StateSpaceModelN.PortIntroduction = 'For Reference';
@@ -39,15 +39,15 @@ function StateSpaceModelN = StateSpaceModel3(StateSpaceModelN)
     StateSpaceModelN.Double_Par = zeros(100,1);
 
     % 定义结构体中的函数句柄
-    StateSpaceModelN.StateTransitionEquation = @(In_State, StateSpaceModelN) StateSpaceModel3StateTransitionFunction(In_State, StateSpaceModelN);
-    StateSpaceModelN.ObservationEquation = @(In_State, StateSpaceModelN) StateSpaceModel3ObservationFunction(In_State, StateSpaceModelN);
-    StateSpaceModelN.PredictionEquation = @(In_State, StateSpaceModelN) StateSpaceModel3PredictionFunction(In_State, StateSpaceModelN);
-    StateSpaceModelN.EstimatorPort = @(StateSpaceModelN) StateSpaceModel3EstimatorPort(StateSpaceModelN);
-    StateSpaceModelN.EstimatorPortTermination = @(StateSpaceModelN) StateSpaceModel3EstimatorPortTermination();
+    StateSpaceModelN.StateTransitionEquation = @(In_State, StateSpaceModelN) StateSpaceModel_2DUAMStateTransitionFunction(In_State, StateSpaceModelN);
+    StateSpaceModelN.ObservationEquation = @(In_State, StateSpaceModelN) StateSpaceModel_2DUAMObservationFunction(In_State, StateSpaceModelN);
+    StateSpaceModelN.PredictionEquation = @(In_State, StateSpaceModelN) StateSpaceModel_2DUAMPredictionFunction(In_State, StateSpaceModelN);
+    StateSpaceModelN.EstimatorPort = @(StateSpaceModelN) StateSpaceModel_2DUAMEstimatorPort(StateSpaceModelN);
+    StateSpaceModelN.EstimatorPortTermination = @(StateSpaceModelN) StateSpaceModel_2DUAMEstimatorPortTermination();
 end
 
 % 定义各个函数的实现
-function [Out_State, StateSpaceModelN] = StateSpaceModel3StateTransitionFunction(In_State, StateSpaceModelN)
+function [Out_State, StateSpaceModelN] = StateSpaceModel_2DUAMStateTransitionFunction(In_State, StateSpaceModelN)
     Out_State = zeros(StateSpaceModelN.Nx,1);
     Out_State(1) = In_State(1) + StateSpaceModelN.Intervel * In_State(2) * StateSpaceModelN.Intervel * StateSpaceModelN.Intervel * In_State(3) / 2;
     Out_State(2) = In_State(2) + StateSpaceModelN.Intervel * In_State(3);
@@ -60,14 +60,14 @@ function [Out_State, StateSpaceModelN] = StateSpaceModel3StateTransitionFunction
     Out_State(9) = In_State(9);
 end
 
-function [Out_Observation, StateSpaceModelN] = StateSpaceModel3ObservationFunction(In_State, StateSpaceModelN)
+function [Out_Observation, StateSpaceModelN] = StateSpaceModel_2DUAMObservationFunction(In_State, StateSpaceModelN)
     Out_Observation = zeros(StateSpaceModelN.Nz,1);
     Out_Observation(1) = In_State(1);
     Out_Observation(2) = In_State(4);
     Out_Observation(3) = In_State(7);
 end
 
-function [Out_PredictedState, StateSpaceModelN] = StateSpaceModel3PredictionFunction(In_State, StateSpaceModelN)
+function [Out_PredictedState, StateSpaceModelN] = StateSpaceModel_2DUAMPredictionFunction(In_State, StateSpaceModelN)
     Out_PredictedState = zeros(StateSpaceModelN.Nx,1);
     
     Out_PredictedState(1) = In_State(1) + StateSpaceModelN.PredictTime * In_State(2) * StateSpaceModelN.PredictTime * StateSpaceModelN.PredictTime * In_State(3) / 2;
@@ -81,10 +81,10 @@ function [Out_PredictedState, StateSpaceModelN] = StateSpaceModel3PredictionFunc
     Out_PredictedState(9) = In_State(9);
 end
 
-function StateSpaceModelN = StateSpaceModel3EstimatorPort(StateSpaceModelN)
+function StateSpaceModelN = StateSpaceModel_2DUAMEstimatorPort(StateSpaceModelN)
     StateSpaceModelN = Estimator3002(StateSpaceModelN);
 end
 
-function StateSpaceModel3EstimatorPortTermination(StateSpaceModelN)
+function StateSpaceModel_2DUAMEstimatorPortTermination(StateSpaceModelN)
     fprintf('EstimatorPort terminated.\n');
 end

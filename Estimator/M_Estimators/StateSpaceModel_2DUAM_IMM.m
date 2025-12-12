@@ -1,8 +1,8 @@
-function StateSpaceModelN = StateSpaceModel5(StateSpaceModelN)
-    % 2D Constant-Acceleration Model + IMM Wrapper
+function StateSpaceModelN = StateSpaceModel_2DUAM_IMM(StateSpaceModelN)
+    % 2D Uniform Acceleration Model + IMM Wrapper
     % 状态: x = [x; vx; ax; y; vy; ay]
 
-    StateSpaceModelN.PortName        = 'Interactive Multiple Model';
+    StateSpaceModelN.PortName        = 'IMM-2D UAM';
     StateSpaceModelN.PortIntroduction= 'For Reference';
 
     StateSpaceModelN.Nx          = 6;
@@ -49,26 +49,26 @@ function StateSpaceModelN = StateSpaceModel5(StateSpaceModelN)
     StateSpaceModelN.Matrix_Par = zeros(100,1);
 
     % ===== 函数句柄（统统匀加速度线性模型） =====
-    StateSpaceModelN.StateTransitionEquation     =  @(In_State, StateSpaceModelN) StateSpaceModel5StateTransitionFunction(In_State, StateSpaceModelN);
-    StateSpaceModelN.ObservationEquation         =  @(In_State, StateSpaceModelN) StateSpaceModel5ObservationFunction(In_State, StateSpaceModelN);
-    StateSpaceModelN.PredictionEquation          =  @(In_State, StateSpaceModelN) StateSpaceModel5PredictionFunction(In_State, StateSpaceModelN);
-    StateSpaceModelN.EstimatorPort               =  @(StateSpaceModelN) StateSpaceModel5EstimatorPort(StateSpaceModelN);
-    StateSpaceModelN.EstimatorPortTermination    =  @(StateSpaceModelN) StateSpaceModel5EstimatorPortTermination(StateSpaceModelN);
+    StateSpaceModelN.StateTransitionEquation     =  @(In_State, StateSpaceModelN) StateSpaceModel_2DUAM_IMMStateTransitionFunction(In_State, StateSpaceModelN);
+    StateSpaceModelN.ObservationEquation         =  @(In_State, StateSpaceModelN) StateSpaceModel_2DUAM_IMMObservationFunction(In_State, StateSpaceModelN);
+    StateSpaceModelN.PredictionEquation          =  @(In_State, StateSpaceModelN) StateSpaceModel_2DUAM_IMMPredictionFunction(In_State, StateSpaceModelN);
+    StateSpaceModelN.EstimatorPort               =  @(StateSpaceModelN) StateSpaceModel_2DUAM_IMMEstimatorPort(StateSpaceModelN);
+    StateSpaceModelN.EstimatorPortTermination    =  @(StateSpaceModelN) StateSpaceModel_2DUAM_IMMEstimatorPortTermination(StateSpaceModelN);
 
     StateSpaceModelN.IMM_ModeNames = {'SubModel1','SubModel2','SubModel3'};
     StateSpaceModelN.IMM_Mn  = numel(StateSpaceModelN.IMM_ModeNames);
 
     StateSpaceModelN.(StateSpaceModelN.IMM_ModeNames{1}) = struct();
     StateSpaceModelN.(StateSpaceModelN.IMM_ModeNames{1}) = ...
-        StateSpaceModel1(StateSpaceModelN.(StateSpaceModelN.IMM_ModeNames{1}));
+        StateSpaceModel_2DSinM(StateSpaceModelN.(StateSpaceModelN.IMM_ModeNames{1}));
 
     StateSpaceModelN.(StateSpaceModelN.IMM_ModeNames{2}) = struct();
     StateSpaceModelN.(StateSpaceModelN.IMM_ModeNames{2}) = ...
-        StateSpaceModel2(StateSpaceModelN.(StateSpaceModelN.IMM_ModeNames{2}));
+        StateSpaceModel_2DUAM(StateSpaceModelN.(StateSpaceModelN.IMM_ModeNames{2}));
 
     StateSpaceModelN.(StateSpaceModelN.IMM_ModeNames{3}) = struct();
     StateSpaceModelN.(StateSpaceModelN.IMM_ModeNames{3}) = ...
-        StateSpaceModel4(StateSpaceModelN.(StateSpaceModelN.IMM_ModeNames{3}));
+        StateSpaceModel_2DDMM(StateSpaceModelN.(StateSpaceModelN.IMM_ModeNames{3}));
 
     % 模式转移矩阵 & 初始概率
     StateSpaceModelN.IMM_Ptrans   = [0.90 0.05 0.05;
@@ -77,15 +77,15 @@ function StateSpaceModelN = StateSpaceModel5(StateSpaceModelN)
     StateSpaceModelN.IMM_ModeProb = [0.4; 0.3; 0.3];
 end
 
-function [Out_State, StateSpaceModelN] = StateSpaceModel5StateTransitionFunction(In_State, StateSpaceModelN)
+function [Out_State, StateSpaceModelN] = StateSpaceModel_2DUAM_IMMStateTransitionFunction(In_State, StateSpaceModelN)
     Out_State = StateSpaceModelN.Matrix_F * In_State;
 end
 
-function [Out_Observation, StateSpaceModelN] = StateSpaceModel5ObservationFunction(In_State, StateSpaceModelN)
+function [Out_Observation, StateSpaceModelN] = StateSpaceModel_2DUAM_IMMObservationFunction(In_State, StateSpaceModelN)
     Out_Observation = StateSpaceModelN.Matrix_H * In_State;
 end
 
-function [Out_PredictedState, StateSpaceModelN] = StateSpaceModel5PredictionFunction(In_State, StateSpaceModelN)
+function [Out_PredictedState, StateSpaceModelN] = StateSpaceModel_2DUAM_IMMPredictionFunction(In_State, StateSpaceModelN)
     T = StateSpaceModelN.PredictTime;
     Matrix_F = eye(StateSpaceModelN.Nx);
     Matrix_F(1,2) = T;
@@ -100,11 +100,11 @@ end
 
 
 % ================== 估计器入口：IMM 顶层 ==================
-function StateSpaceModelN = StateSpaceModel5EstimatorPort(StateSpaceModelN)
+function StateSpaceModelN = StateSpaceModel_2DUAM_IMMEstimatorPort(StateSpaceModelN)
     StateSpaceModelN = Estimator3010(StateSpaceModelN);
 end
 
 
-function StateSpaceModel5EstimatorPortTermination(StateSpaceModelN)
-    fprintf('StateSpaceModel5 EstimatorPort terminated.\n');
+function StateSpaceModel_2DUAM_IMMEstimatorPortTermination(StateSpaceModelN)
+    fprintf('StateSpaceModel_2DUAM_IMM EstimatorPort terminated.\n');
 end
