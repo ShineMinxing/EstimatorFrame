@@ -1,8 +1,7 @@
 // used in go2 robot
 
 #include "EstimatorPortN.h"
-#include "Cpp_Estimators/Estimator2001_Kalman.h"
-#include "Cpp_Estimators/Estimator2002_UnscentedKalmanEstiamtor.h"
+#include "C_Estimators/Estimator1001_Kalman.h"
 
 EstimatorPortN StateSpaceModel_Go2_;
 
@@ -16,16 +15,13 @@ void StateSpaceModel_Go2_StateTransitionFunction(double *In_State, double *Out_S
 		Out_State[i * 3 + 1] = In_State[i * 3 + 1] + In_State[i * 3 + 2] * estimator->Intervel;
 		Out_State[i * 3 + 2] = In_State[i * 3 + 2];
 	}
-    printf("Error");
 }
 
 void StateSpaceModel_Go2_ObservationFunction(double *In_State, double *Out_Observation, EstimatorPortN *estimator) {
-
-    Out_Observation[0] = In_State[0];
-    Out_Observation[1] = In_State[3];
-    Out_Observation[2] = In_State[6];
-
-    printf("Error");
+	for (int i = 0; i < 9; i++)
+	{
+        Out_Observation[i] = In_State[i];
+    }
 }
 
 void StateSpaceModel_Go2_PredictionFunction(double *In_State, double *Out_PredictedState, EstimatorPortN *estimator) {
@@ -35,7 +31,6 @@ void StateSpaceModel_Go2_PredictionFunction(double *In_State, double *Out_Predic
 		Out_PredictedState[i * 3 + 1] = In_State[i * 3 + 1] + In_State[i * 3 + 2] * estimator->PredictTime;
 		Out_PredictedState[i * 3 + 2] = In_State[i * 3 + 2];
 	}
-    printf("Error");
 }
 
 EXPORT void StateSpaceModel_Go2_EstimatorPort(double *In_Observation, double In_Observation_Timestamp, struct EstimatorPortN *estimator) {
@@ -43,14 +38,11 @@ EXPORT void StateSpaceModel_Go2_EstimatorPort(double *In_Observation, double In_
 	{
 		estimator->CurrentObservation[i] = In_Observation[i];
 	}
-    estimator->ObservationTimestamp = In_Observation_Timestamp;
-    estimator->CurrentTimestamp = In_Observation_Timestamp;
-    Estimator2001_Estimation(estimator);
-    estimator->StateUpdateTimestamp = estimator->CurrentTimestamp;
+    Estimator1001_Estimation(estimator);
 }
 
 EXPORT void StateSpaceModel_Go2_EstimatorPortTermination(struct EstimatorPortN *estimator) {
-    Estimator2001_Termination();
+    Estimator1001_Termination();
 
     free(estimator->PortName);
     estimator->PortName = NULL;
@@ -78,8 +70,6 @@ EXPORT void StateSpaceModel_Go2_EstimatorPortTermination(struct EstimatorPortN *
     estimator->Matrix_Q = NULL;
     free(estimator->Matrix_R);
     estimator->Matrix_R = NULL;
-    free(estimator->Int_Par);
-    estimator->Int_Par = NULL;
     free(estimator->Double_Par);
     estimator->Double_Par = NULL;
     printf("EstimatorPort terminated.\n");
@@ -94,7 +84,7 @@ EXPORT void StateSpaceModel_Go2_Initialization(EstimatorPortN *estimator)
     #define StateSpaceModel_Go2_NX 9
     #define StateSpaceModel_Go2_NZ 9
     #define StateSpaceModel_Go2_PredictStep 0
-    #define StateSpaceModel_Go2_Interval 0.0015
+    #define StateSpaceModel_Go2_Interval 0.004
     #define StateSpaceModel_Go2_PredictTime 0
     #define StateSpaceModel_Go2_ObservationTimestamp 0
 
@@ -170,18 +160,21 @@ EXPORT void StateSpaceModel_Go2_Initialization(EstimatorPortN *estimator)
     0,0,0,0,0,0,0,1,0,\
     0,0,0,0,0,0,0,0,1\
     };
-    double Int_Par[6] = {0,0,0,0,0,0};
-    double Double_Par[6] = {0,0,0,0,0,0};
+    int Int_Par[100] = {0};
+    double Double_Par[100] = {0};
+
+    estimator->PortName = (char *)malloc(100);
+    estimator->PortIntroduction = (char *)malloc(1000);
 
     estimator->Nx = StateSpaceModel_Go2_NX;
     estimator->Nz = StateSpaceModel_Go2_NZ;
     estimator->PredictStep = StateSpaceModel_Go2_PredictStep;
     estimator->Intervel = StateSpaceModel_Go2_Interval;
     estimator->PredictTime = StateSpaceModel_Go2_PredictTime;
+    estimator->CurrentTimestamp = StateSpaceModel_Go2_ObservationTimestamp;
+    estimator->StateUpdateTimestamp = StateSpaceModel_Go2_ObservationTimestamp;
     estimator->ObservationTimestamp = StateSpaceModel_Go2_ObservationTimestamp;
 
-    estimator->PortName = (char *)malloc(100);
-    estimator->PortIntroduction = (char *)malloc(1000);
     estimator->EstimatedState = (double *)malloc(estimator->Nx * sizeof(double));
     estimator->PredictedState = (double *)malloc(estimator->Nx * sizeof(double));
     estimator->CurrentObservation = (double *)malloc(estimator->Nz * sizeof(double));
@@ -193,7 +186,7 @@ EXPORT void StateSpaceModel_Go2_Initialization(EstimatorPortN *estimator)
     estimator->Matrix_P = (double *)malloc(estimator->Nx * estimator->Nx * sizeof(double));
     estimator->Matrix_Q = (double *)malloc(estimator->Nx * estimator->Nx * sizeof(double));
     estimator->Matrix_R = (double *)malloc(estimator->Nz * estimator->Nz * sizeof(double));
-    estimator->Int_Par = (int *)malloc(100 * sizeof(int));
+    estimator->Int_Par  = (int *)malloc(100 * sizeof(int));
     estimator->Double_Par = (double *)malloc(100 * sizeof(double));
     if (estimator->PortName == NULL || estimator->PortIntroduction == NULL ||\
         estimator->EstimatedState == NULL || estimator->PredictedState == NULL ||\
@@ -201,11 +194,12 @@ EXPORT void StateSpaceModel_Go2_Initialization(EstimatorPortN *estimator)
         estimator->Matrix_F == NULL || estimator->Matrix_G == NULL ||\
         estimator->Matrix_B == NULL || estimator->Matrix_H == NULL ||\
         estimator->Matrix_P == NULL || estimator->Matrix_Q == NULL ||\
-        estimator->Matrix_R == NULL || estimator->Int_Par == NULL ||\
-        estimator->Double_Par == NULL) {
-        perror("Memory allocation failed");
-        exit(EXIT_FAILURE);
-    }
+        estimator->Matrix_R == NULL || estimator->Int_Par  == NULL||\
+        estimator->Double_Par == NULL) 
+        {
+            perror("Memory allocation failed");
+            exit(EXIT_FAILURE);
+        }
 
     strcpy(estimator->PortName, PortNameTemp);
     strcpy(estimator->PortIntroduction, PortIntroductionTemp);
@@ -228,5 +222,5 @@ EXPORT void StateSpaceModel_Go2_Initialization(EstimatorPortN *estimator)
 
     printf("%s is initialized\n", estimator->PortName);
 
-    Estimator2001_Init(estimator);
+    Estimator1001_Init(estimator);
 }

@@ -8,11 +8,11 @@
 % After put those estimators into Estimator\C_Estimators, Estimator\Cpp_Estimators, 
 % and add them into compile scope, you can easily call them.
 % 
-% You can see "EXPORT extern EstimatorPortN StateSpaceModel1_;" below. 
+% You can see "EXPORT extern EstimatorPortN StateSpaceModel_Demo_;" below. 
 % Of course you can:
 % 1. Define more StateSpaceModel_Go2_ StateSpaceModel3_... in this h file.
-% 2. Copy more Estimator\StateSpaceModel1.c and name them with StateSpaceModel_Go2.cpp...
-% 3. Replace all "StateSpaceModel1_" to "StateSpaceModel_Go2_" in "StateSpaceModel_Go2.cpp", and you can define more 
+% 2. Copy more Estimator\StateSpaceModel_Demo.c and name them with StateSpaceModel_Go2.cpp...
+% 3. Replace all "StateSpaceModel_Demo_" to "StateSpaceModel_Go2_" in "StateSpaceModel_Go2.cpp", and you can define more 
 %     linear or nonlinear state space model.
 % 4. If you want to use different estimamtor to realize a StateSpaceModelN, replace all 
 %     "Estimator1001_" to "EstimatorXXXX_", which is defined in your EstimatorXXXX_XXXXX.c/EstimatorXXXX_XXXXX.cpp.
@@ -25,7 +25,7 @@
 % 5. Generate a dll file in advance (~) and call by Matlab project like M_DLL_Demo.m.
 % 6. Generate a dll file in advance (~) and call by Python project like Python_DLL_Demo.py.
 %
-% Source files in Estimator\C_Estimators, Estimator\Cpp_Estimators and Estimator\StateSpaceModel1.c are used. 
+% Source files in Estimator\C_Estimators, Estimator\Cpp_Estimators and Estimator\StateSpaceModel_Demo.c are used. 
 % Make sure there is at least one estimator method in the subdirectory, like 
 % Estimator1001_Kalman.c and Estimator1001_Kalman.h.
 %
@@ -94,8 +94,7 @@ typedef struct EstimatorPortN {
     double *Matrix_P;  // InitialProbability
     double *Matrix_Q;  // ProcessNoiseCovariance
     double *Matrix_R;  // ObserveNoiseCovariance
-
-    int *Int_Par;
+    int    *Int_Par;
     double *Double_Par;
 
     void (*StateTransitionEquation)(double *In_State, double *Out_State, struct EstimatorPortN *estimator);
@@ -104,18 +103,8 @@ typedef struct EstimatorPortN {
 
 } EstimatorPortN;
 
-// If you have a new state space model, copy following 4 lines, and substitute StateSpaceModel1_ to StateSpaceModelN_
-// And then, copy StateSpaceModel1.c, and substitute all StateSpaceModel1_ in it to StateSpaceModelN_
-EXPORT extern EstimatorPortN StateSpaceModel1_;
-EXPORT void StateSpaceModel1_Initialization(struct EstimatorPortN *estimator);
-EXPORT void StateSpaceModel1_EstimatorPort(double *In_Observation, double In_Observation_Timestamp, struct EstimatorPortN *estimator);
-EXPORT void StateSpaceModel1_EstimatorPortTermination(struct EstimatorPortN *estimator);
-
-EXPORT extern EstimatorPortN StateSpaceModel_Demo_;
-EXPORT void StateSpaceModel_Demo_Initialization(struct EstimatorPortN *estimator);
-EXPORT void StateSpaceModel_Demo_EstimatorPort(double *In_Observation, double In_Observation_Timestamp, struct EstimatorPortN *estimator);
-EXPORT void StateSpaceModel_Demo_EstimatorPortTermination(struct EstimatorPortN *estimator);
-
+// If you have a new state space model, copy following 4 lines, and substitute StateSpaceModel_Demo_ to StateSpaceModelN_
+// And then, copy StateSpaceModel_Demo.c, and substitute all StateSpaceModel_Demo_ in it to StateSpaceModelN_
 EXPORT extern EstimatorPortN StateSpaceModel_Go2_;
 EXPORT void StateSpaceModel_Go2_Initialization(struct EstimatorPortN *estimator);
 EXPORT void StateSpaceModel_Go2_EstimatorPort(double *In_Observation, double In_Observation_Timestamp, struct EstimatorPortN *estimator);

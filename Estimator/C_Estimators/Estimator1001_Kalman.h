@@ -29,7 +29,7 @@ void Estimator1001_Estimation(EstimatorPortN *estimator);
 void Estimator1001_Output(EstimatorPortN *estimator);
 void Estimator1001_Termination();
 
-MATRIX *E1001_F, *E1001_FT, *E1001_G, *E1001_H, *E1001_HT, *E1001_Q, *E1001_R, *E1001_Xe, *E1001_Xp, *E1001_Z, *E1001_Ze, *E1001_P, *E1001_P_pre, *E1001_K;
-MATRIX *E1001_XX1, *E1001_XX2, *E1001_ZX1, *E1001_XZ1, *E1001_ZZ1, *E1001_ZZ2, *E1001_X11, *E1001_Z11, *E1001_Z12, *E1001_eyeX;
+extern MATRIX *E1001_F, *E1001_FT, *E1001_G, *E1001_H, *E1001_HT, *E1001_Q, *E1001_R, *E1001_Xe, *E1001_Xp, *E1001_Z, *E1001_Ze, *E1001_P, *E1001_P_pre, *E1001_K;
+extern MATRIX *E1001_XX1, *E1001_XX2, *E1001_ZX1, *E1001_XZ1, *E1001_ZZ1, *E1001_ZZ2, *E1001_X11, *E1001_Z11, *E1001_Z12, *E1001_eyeX;
 
 #endif
