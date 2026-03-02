@@ -29,9 +29,9 @@ void Estimator1002_Estimation(EstimatorPortN *estimator);
 void Estimator1002_Output(EstimatorPortN *estimator);
 void Estimator1002_Termination();
 
-MATRIX *E1002_Q, *E1002_R, *E1002_Xe, *E1002_Xp, *E1002_Z, *E1002_Ze, *E1002_P, *E1002_P_pre, *E1002_K;
-MATRIX *E1002_Alpha, *E1002_Beta, *E1002_Ki, *E1002_Lambda, *E1002_A, *E1002_Xsigma, *E1002_Xsgm0, *E1002_Xmean;
-MATRIX *E1002_Wm, *E1002_Wc, *E1002_DiagWc, *E1002_X2X1, *E1002_Z2X1, *E1002_Zmean, *E1002_X1, *E1002_X2, *E1002_X2T, *E1002_Z1, *E1002_Z2, *E1002_Z2T, *E1002_Pxz, *E1002_PxzT, *E1002_Pzz;
-MATRIX *E1002_X11, *E1002_X12, *E1002_Z11, *E1002_Z12, *E1002_ZZ1, *E1002_XX1;
+extern MATRIX *E1002_Q, *E1002_R, *E1002_Xe, *E1002_Xp, *E1002_Z, *E1002_Ze, *E1002_P, *E1002_P_pre, *E1002_K;
+extern MATRIX *E1002_Alpha, *E1002_Beta, *E1002_Ki, *E1002_Lambda, *E1002_A, *E1002_Xsigma, *E1002_Xsgm0, *E1002_Xmean;
+extern MATRIX *E1002_Wm, *E1002_Wc, *E1002_DiagWc, *E1002_X2X1, *E1002_Z2X1, *E1002_Zmean, *E1002_X1, *E1002_X2, *E1002_X2T, *E1002_Z1, *E1002_Z2, *E1002_Z2T, *E1002_Pxz, *E1002_PxzT, *E1002_Pzz;
+extern MATRIX *E1002_X11, *E1002_X12, *E1002_Z11, *E1002_Z12, *E1002_ZZ1, *E1002_XX1;
 
 #endif

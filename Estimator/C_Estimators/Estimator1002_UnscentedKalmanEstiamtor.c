@@ -1,5 +1,10 @@
 #include "Estimator1002_UnscentedKalmanEstiamtor.h"
 
+MATRIX *E1002_Q, *E1002_R, *E1002_Xe, *E1002_Xp, *E1002_Z, *E1002_Ze, *E1002_P, *E1002_P_pre, *E1002_K;
+MATRIX *E1002_Alpha, *E1002_Beta, *E1002_Ki, *E1002_Lambda, *E1002_A, *E1002_Xsigma, *E1002_Xsgm0, *E1002_Xmean;
+MATRIX *E1002_Wm, *E1002_Wc, *E1002_DiagWc, *E1002_X2X1, *E1002_Z2X1, *E1002_Zmean, *E1002_X1, *E1002_X2, *E1002_X2T, *E1002_Z1, *E1002_Z2, *E1002_Z2T, *E1002_Pxz, *E1002_PxzT, *E1002_Pzz;
+MATRIX *E1002_X11, *E1002_X12, *E1002_Z11, *E1002_Z12, *E1002_ZZ1, *E1002_XX1;
+
 void Estimator1002_Init(EstimatorPortN *estimator)
 {
     init_stack(&S);
@@ -120,9 +125,9 @@ void Estimator1002_Estimation(EstimatorPortN *estimator)
         // State UT transformation
         matrix_extraction(E1002_Xsigma, E1002_X11, 0, i);
         estimator->StateTransitionEquation(E1002_X11->p, E1002_X12->p, estimator);
-        matrix_valuation(E1002_X11, E1002_X1, 0, i);
-        matrix_numbermulti(E1002_Wm->p[i], E1002_X11, E1002_X12);
-        matrix_add(E1002_Xmean, E1002_X12, E1002_Xmean);
+        matrix_valuation(E1002_X12, E1002_X1, 0, i);
+        matrix_numbermulti(E1002_Wm->p[i], E1002_X12, E1002_X11);
+        matrix_add(E1002_Xmean, E1002_X11, E1002_Xmean);
     }
     for (i = 0; i < n; i++)
     {
@@ -174,14 +179,6 @@ void Estimator1002_Estimation(EstimatorPortN *estimator)
     matrix_subtraction(E1002_Z, E1002_Zmean, E1002_Z11);
     matrix_multiplication(E1002_K, E1002_Z11, E1002_X11);
     matrix_add(E1002_Xmean, E1002_X11, E1002_Xe);
-    if (E1002_Xe->p[0] > 2 * PI / E1002_Xe->p[1])
-    {
-        E1002_Xe->p[0] = E1002_Xe->p[0] - 2 * PI / E1002_Xe->p[1];
-    }
-    if (E1002_Xe->p[3] > 2 * PI / E1002_Xe->p[4])
-    {
-        E1002_Xe->p[3] = E1002_Xe->p[3] - 2 * PI / E1002_Xe->p[3];
-    }
     // print_matrix(E1002_Z11,"E1002_Z11");
     // print_matrix(E1002_Xe,"E1002_Xe");
 

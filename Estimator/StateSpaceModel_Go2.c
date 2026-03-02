@@ -7,30 +7,60 @@ EstimatorPortN StateSpaceModel_Go2_;
 
 void StateSpaceModel_Go2_StateTransitionFunction(double *In_State, double *Out_State, struct EstimatorPortN *estimator) {
 
-    estimator->Intervel = estimator->CurrentTimestamp - estimator->StateUpdateTimestamp;
+    MATRIX F;
+    F.rows    = estimator->Nx;
+    F.columns = estimator->Nx;
+    F.p       = estimator->Matrix_F;
 
-	for (int i = 0; i < 3; i++)
-	{
-		Out_State[i * 3 + 0] = In_State[i * 3 + 0] + In_State[i * 3 + 1] * estimator->Intervel + In_State[i * 3 + 2] * estimator->Intervel * estimator->Intervel /2;
-		Out_State[i * 3 + 1] = In_State[i * 3 + 1] + In_State[i * 3 + 2] * estimator->Intervel;
-		Out_State[i * 3 + 2] = In_State[i * 3 + 2];
-	}
+    MATRIX In;
+    In.rows    = estimator->Nx;
+    In.columns = 1;
+    In.p       = In_State;
+
+    MATRIX Out;
+    Out.rows    = estimator->Nx;
+    Out.columns = 1;
+    Out.p       = Out_State;
+
+    matrix_multiplication(&F, &In, &Out);
 }
 
 void StateSpaceModel_Go2_ObservationFunction(double *In_State, double *Out_Observation, EstimatorPortN *estimator) {
-	for (int i = 0; i < 9; i++)
-	{
-        Out_Observation[i] = In_State[i];
-    }
+	MATRIX H;
+    H.rows    = estimator->Nz;
+    H.columns = estimator->Nx;
+    H.p       = estimator->Matrix_H;
+
+    MATRIX In;
+    In.rows    = estimator->Nx;
+    In.columns = 1;
+    In.p       = In_State;
+
+    MATRIX Out;
+    Out.rows    = estimator->Nz;
+    Out.columns = 1;
+    Out.p       = Out_Observation;
+
+    matrix_multiplication(&H, &In, &Out);
 }
 
 void StateSpaceModel_Go2_PredictionFunction(double *In_State, double *Out_PredictedState, EstimatorPortN *estimator) {
-	for (int i = 0; i < 3; i++)
-	{
-		Out_PredictedState[i * 3 + 0] = In_State[i * 3 + 0] + In_State[i * 3 + 1] * estimator->PredictTime + In_State[i * 3 + 2] * estimator->PredictTime * estimator->PredictTime /2;
-		Out_PredictedState[i * 3 + 1] = In_State[i * 3 + 1] + In_State[i * 3 + 2] * estimator->PredictTime;
-		Out_PredictedState[i * 3 + 2] = In_State[i * 3 + 2];
-	}
+	MATRIX F;
+    F.rows    = estimator->Nx;
+    F.columns = estimator->Nx;
+    F.p       = estimator->Matrix_F;
+
+    MATRIX In;
+    In.rows    = estimator->Nx;
+    In.columns = 1;
+    In.p       = In_State;
+
+    MATRIX Out;
+    Out.rows    = estimator->Nx;
+    Out.columns = 1;
+    Out.p       = Out_PredictedState;
+
+    matrix_multiplication(&F, &In, &Out);
 }
 
 EXPORT void StateSpaceModel_Go2_EstimatorPort(double *In_Observation, double In_Observation_Timestamp, struct EstimatorPortN *estimator) {

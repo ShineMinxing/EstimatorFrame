@@ -1,6 +1,7 @@
 // If you want to test another Estimator, substitue EstimatorXXXX_ to your estimator
 
 #include "EstimatorPortN.h"
+#include "C_Estimators/Estimator1001_Kalman.h"
 
 EstimatorPortN StateSpaceModel_Demo_;
 
